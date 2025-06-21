@@ -5,22 +5,22 @@ import { ExternalLink } from "lucide-react";
 const NewsSection = () => {
   const newsItems = [
     {
-      title: "Exprto raises Rs 5 Cr in seed round",
+      title: "MentxTv raises Rs 5 Cr in seed round",
       source: "ENTRACKR",
-      color: "bg-orange-400"
+      color: "bg-blue-500"
     },
     {
-      title: "HostBooks, Exprto, and EduGorilla raise early-stage capital",
+      title: "HostBooks, MentxTv, and EduGorilla raise early-stage capital",
       source: "YOURSTORY",
-      color: "bg-blue-600"
+      color: "bg-indigo-600"
     },
     {
-      title: "Exprto raises Rs 5 crore in funding from GSF, Angel List US",
+      title: "MentxTv raises Rs 5 crore in funding from GSF, Angel List US",
       source: "THE ECONOMIC TIMES",
       color: "bg-teal-600"
     },
     {
-      title: "Exprto raises Rs 5 crore in seed funding from GSF, Angel List US, others",
+      title: "MentxTv raises Rs 5 crore in seed funding from GSF, Angel List US, others",
       source: "BUSINESS STANDARD",
       color: "bg-gray-700"
     }
@@ -31,7 +31,7 @@ const NewsSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Exprto in News
+            MentxTv in News
           </h2>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto">
             We have a long way to go and these mentions are a validation that we are being loved. Check below to stay 
@@ -50,14 +50,14 @@ const NewsSection = () => {
                   {item.source}
                 </div>
                 <h3 className="text-white font-bold text-xl px-6 text-center leading-tight">
-                  Exprto
+                  MentxTv
                 </h3>
               </div>
               <div className="p-6">
-                <h4 className="font-semibold text-gray-900 mb-4 leading-snug group-hover:text-green-600 transition-colors">
+                <h4 className="font-semibold text-gray-900 mb-4 leading-snug group-hover:text-blue-600 transition-colors">
                   {item.title}
                 </h4>
-                <ExternalLink size={20} className="text-gray-400 group-hover:text-green-600 transition-colors" />
+                <ExternalLink size={20} className="text-gray-400 group-hover:text-blue-600 transition-colors" />
               </div>
             </div>
           ))}
@@ -66,13 +66,13 @@ const NewsSection = () => {
         {/* Pagination Dots */}
         <div className="flex justify-center space-x-2 mb-8">
           <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+          <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
         </div>
 
         <div className="text-center">
           <Button 
             size="lg"
-            className="bg-orange-400 hover:bg-orange-500 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
           >
             Click for Updates
           </Button>

@@ -8,25 +8,25 @@ const GetStarted = () => {
       icon: UserCheck,
       title: "1. Register/Login",
       description: "Fill in your details and select a Ranker of your choice.",
-      color: "bg-green-100 text-green-600"
+      color: "bg-blue-100 text-blue-600"
     },
     {
       icon: Calendar,
       title: "2. Schedule a call",
       description: "Select a time slot and book a call with your chosen Ranker.",
-      color: "bg-green-100 text-green-600"
+      color: "bg-blue-100 text-blue-600"
     },
     {
       icon: CreditCard,
       title: "3. Make a payment",
       description: "Choose a payment method & click Pay Now",
-      color: "bg-green-100 text-green-600"
+      color: "bg-blue-100 text-blue-600"
     },
     {
       icon: Phone,
       title: "4. Connect to your mentor",
       description: "You will receive a call back from the ranker at the selected date.",
-      color: "bg-green-100 text-green-600"
+      color: "bg-blue-100 text-blue-600"
     }
   ];
 
@@ -40,12 +40,12 @@ const GetStarted = () => {
               How to get started?
             </h2>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              In just 4 simple steps you can become an elite member of our Exprto family.
+              In just 4 simple steps you can become an elite member of our MentxTv family.
             </p>
             
             <Button 
               size="lg"
-              className="bg-orange-400 hover:bg-orange-500 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Take a Trial Session
             </Button>

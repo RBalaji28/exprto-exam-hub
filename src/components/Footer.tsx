@@ -17,15 +17,15 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6">Top Exams</h3>
             <div className="space-y-3">
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">JEE Main 2024</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">JEE Main 2025</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">JEE Advanced 2024</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">JEE Advanced 2025</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">NEET UG 2024-2025</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">NEET PG 2024-2025</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">SAT | GRE | GMAT | TOEFL | IELTS</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">JEE | NEET Study Abroad</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Board Exam</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Main 2024</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Main 2025</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Advanced 2024</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Advanced 2025</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">NEET UG 2024-2025</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">NEET PG 2024-2025</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">SAT | GRE | GMAT | TOEFL | IELTS</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE | NEET Study Abroad</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Board Exam</a>
             </div>
           </div>
 
@@ -33,13 +33,13 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6">Important Links</h3>
             <div className="space-y-3">
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Mentorship For JEE Main</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Mentorship For JEE Advance</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Mentorship For NEET UG</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Mentorship For NEET PG</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Mentorship for SAT | GRE | GMAT</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Mentorship For TOEFL | IELTS</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Mentorship For JEE | NEET Abroad</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For JEE Main</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For JEE Advance</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For NEET UG</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For NEET PG</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship for SAT | GRE | GMAT</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For TOEFL | IELTS</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For JEE | NEET Abroad</a>
             </div>
           </div>
 
@@ -47,14 +47,14 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6">Other Links</h3>
             <div className="space-y-3">
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Mentorship Plan</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Our Mentor</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">JEE Main Mentor</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">JEE Advance Mentor</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">NEET Mentor</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Become Mentor</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Take a Trial Session</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Toppers & Student Community</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship Plan</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Our Mentor</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Main Mentor</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Advance Mentor</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">NEET Mentor</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Become Mentor</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Take a Trial Session</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Toppers & Student Community</a>
             </div>
           </div>
 
@@ -62,14 +62,14 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6">Company</h3>
             <div className="space-y-3">
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">About Us</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Blogs</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Our Team</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">FAQs</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Future Nurture</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Contact Us</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Terms and Conditions</a>
-              <a href="#" className="block text-gray-300 hover:text-green-400 transition-colors">Privacy Policy</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">About Us</a>
+              <a href="/blogs" className="block text-gray-300 hover:text-blue-400 transition-colors">Blogs</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Our Team</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">FAQs</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Future Nurture</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Contact Us</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Terms and Conditions</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Privacy Policy</a>
             </div>
           </div>
         </div>
@@ -80,19 +80,19 @@ const Footer = () => {
             <div className="mb-6 md:mb-0">
               <h4 className="text-lg font-semibold mb-4">Follow Us :</h4>
               <div className="flex space-x-4">
-                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
                   <Facebook size={20} />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
                   <Twitter size={20} />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
                   <Youtube size={20} />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
                   <Instagram size={20} />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
                   <Linkedin size={20} />
                 </a>
               </div>
@@ -100,7 +100,7 @@ const Footer = () => {
             
             <div className="text-center">
               <p className="text-gray-400">
-                © 2024-25 by EXPRTO TECHNOLOGIES PRIVATE LIMITED
+                © 2024-25 by MENTXTV TECHNOLOGIES PRIVATE LIMITED
               </p>
             </div>
           </div>
