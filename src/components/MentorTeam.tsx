@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { GraduationCap } from "lucide-react";
 import {
@@ -15,7 +14,7 @@ const MentorTeam = () => {
       name: "Hritishna Nayak",
       title: "NEET Topper",
       institution: "FMMC Hospital,Balasore Odisha",
-      image: "https://images.unsplash.com/photo-1494790108755-2616c06a9c0f?w=200&h=200&fit=crop&crop=face"
+      image: "https://images.unsplash.com/photo-1594824020343-d0bd6dc49c33?w=200&h=200&fit=crop&crop=face"
     },
     {
       name: "Cihir Reddy",
