@@ -8,7 +8,7 @@ const Navigation = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   const sideMenuItems = [
-    { icon: User, label: "Login/Signup", href: "#" },
+    { icon: User, label: "Login/Signup", href: "/login" },
     { icon: Users, label: "Our Mentors", href: "#" },
     { icon: BookOpen, label: "Mentorship Plans", href: "#" },
     { icon: FileText, label: "Blogs", href: "/blogs" },
@@ -61,6 +61,7 @@ const Navigation = () => {
               <Button 
                 variant="outline" 
                 className="border-blue-500 text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-full font-medium"
+                onClick={() => window.location.href = '/login'}
               >
                 LOGIN
               </Button>
@@ -103,7 +104,11 @@ const Navigation = () => {
                   <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-full">
                     Book a Free Session
                   </Button>
-                  <Button variant="outline" className="border-blue-500 text-blue-600 hover:bg-blue-50 rounded-full">
+                  <Button 
+                    variant="outline" 
+                    className="border-blue-500 text-blue-600 hover:bg-blue-50 rounded-full"
+                    onClick={() => window.location.href = '/login'}
+                  >
                     LOGIN
                   </Button>
                 </div>

@@ -9,6 +9,8 @@ import ExamDetails from "./pages/ExamDetails";
 import BecomeMentor from "./pages/BecomeMentor";
 import TestPortal from "./pages/TestPortal";
 import Blogs from "./pages/Blogs";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/become-mentor" element={<BecomeMentor />} />
           <Route path="/test-portal" element={<TestPortal />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

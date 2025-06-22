@@ -5,7 +5,6 @@ import MentorshipBenefits from "@/components/MentorshipBenefits";
 import MentorTeam from "@/components/MentorTeam";
 import GetStarted from "@/components/GetStarted";
 import StudentJourney from "@/components/StudentJourney";
-import NewsSection from "@/components/NewsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
 
@@ -18,7 +17,6 @@ const Index = () => {
       <MentorTeam />
       <GetStarted />
       <StudentJourney />
-      <NewsSection />
       <TestimonialsSection />
       <Footer />
     </div>
