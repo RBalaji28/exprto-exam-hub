@@ -28,7 +28,12 @@ const Navigation = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 flex items-center gap-2">
+              <img 
+                src="/lovable-uploads/5d782425-50a4-4419-8ded-ab9e0ed405cb.png" 
+                alt="MentxTv Logo" 
+                className="h-8 w-8"
+              />
               <h1 className="text-2xl font-bold text-gray-900">MentxTv</h1>
             </div>
 
@@ -123,7 +128,14 @@ const Navigation = () => {
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50">
           <div className="fixed right-0 top-0 h-full w-80 bg-white shadow-lg">
             <div className="flex justify-between items-center p-4 border-b">
-              <h2 className="text-xl font-bold text-gray-900">MentxTv</h2>
+              <div className="flex items-center gap-2">
+                <img 
+                  src="/lovable-uploads/5d782425-50a4-4419-8ded-ab9e0ed405cb.png" 
+                  alt="MentxTv Logo" 
+                  className="h-6 w-6"
+                />
+                <h2 className="text-xl font-bold text-gray-900">MentxTv</h2>
+              </div>
               <button
                 onClick={() => setIsSideMenuOpen(false)}
                 className="p-2 text-gray-700 hover:text-blue-600"
