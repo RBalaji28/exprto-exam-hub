@@ -12,6 +12,11 @@ import Blogs from "./pages/Blogs";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
+import RoleLogin from "./pages/RoleLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminMentors from "./pages/AdminMentors";
+import MentorDashboard from "./pages/MentorDashboard";
+import StudentDashboard from "./pages/StudentDashboard";
 
 const queryClient = new QueryClient();
 
