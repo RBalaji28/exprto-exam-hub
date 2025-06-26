@@ -35,6 +35,13 @@ const Navigation = () => {
                 className="h-8 w-8"
               />
               <h1 className="text-2xl font-bold text-gray-900">MentxTv</h1>
+              <svg 
+                viewBox="0 0 24 24" 
+                className="h-6 w-6 text-gray-700 ml-2"
+                fill="currentColor"
+              >
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
             </div>
 
             {/* Desktop Navigation */}
@@ -57,12 +64,6 @@ const Navigation = () => {
 
             {/* Desktop Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <Button 
-                variant="default" 
-                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full font-medium"
-              >
-                Book a Free Session
-              </Button>
               <Button 
                 variant="outline" 
                 className="border-blue-500 text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-full font-medium"
@@ -106,9 +107,6 @@ const Navigation = () => {
                   Test Portal
                 </a>
                 <div className="flex flex-col space-y-2 px-3 py-2">
-                  <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-full">
-                    Book a Free Session
-                  </Button>
                   <Button 
                     variant="outline" 
                     className="border-blue-500 text-blue-600 hover:bg-blue-50 rounded-full"
@@ -135,6 +133,13 @@ const Navigation = () => {
                   className="h-6 w-6"
                 />
                 <h2 className="text-xl font-bold text-gray-900">MentxTv</h2>
+                <svg 
+                  viewBox="0 0 24 24" 
+                  className="h-5 w-5 text-gray-700"
+                  fill="currentColor"
+                >
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
               </div>
               <button
                 onClick={() => setIsSideMenuOpen(false)}
