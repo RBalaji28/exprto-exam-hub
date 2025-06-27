@@ -7,7 +7,6 @@ import GetStarted from "@/components/GetStarted";
 import StudentJourney from "@/components/StudentJourney";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
-import LoginPopup from "@/components/LoginPopup";
 
 const Index = () => {
   return (
@@ -20,7 +19,6 @@ const Index = () => {
       <StudentJourney />
       <TestimonialsSection />
       <Footer />
-      <LoginPopup />
     </div>
   );
 };
