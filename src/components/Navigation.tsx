@@ -1,11 +1,15 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Menu, X, User, BookOpen, MessageCircle, Users, HelpCircle, Shield, FileText, Phone } from "lucide-react";
+import { useUser } from "@/contexts/UserContext";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const { user, logout } = useUser();
 
   const sideMenuItems = [
     { icon: User, label: "Login/Signup", href: "/login" },
@@ -22,13 +26,32 @@ const Navigation = () => {
     { icon: Shield, label: "Privacy Policy", href: "#" },
   ];
 
+  const handleLogout = () => {
+    logout();
+    setIsSideMenuOpen(false);
+  };
+
+  const getDashboardLink = () => {
+    if (!user) return "/";
+    switch (user.role) {
+      case "Student":
+        return "/student-dashboard";
+      case "Mentor":
+        return "/mentor-dashboard";
+      case "Admin":
+        return "/admin-dashboard";
+      default:
+        return "/";
+    }
+  };
+
   return (
     <>
       <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="flex-shrink-0 flex items-center gap-2">
+            <Link to="/" className="flex-shrink-0 flex items-center gap-2">
               <img 
                 src="/lovable-uploads/5d782425-50a4-4419-8ded-ab9e0ed405cb.png" 
                 alt="MentxTv Logo" 
@@ -42,7 +65,7 @@ const Navigation = () => {
               >
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
-            </div>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:block">
@@ -64,13 +87,35 @@ const Navigation = () => {
 
             {/* Desktop Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <Button 
-                variant="outline" 
-                className="border-blue-500 text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-full font-medium"
-                onClick={() => window.location.href = '/login'}
-              >
-                LOGIN
-              </Button>
+              {user ? (
+                <Link to={getDashboardLink()}>
+                  <Avatar className="h-8 w-8 cursor-pointer">
+                    <AvatarImage src={user.image} />
+                    <AvatarFallback 
+                      className={`text-white text-sm ${
+                        user.role === 'Student' ? 'bg-blue-600' :
+                        user.role === 'Mentor' ? 'bg-green-600' :
+                        'bg-gray-600'
+                      }`}
+                    >
+                      {user.role === 'Student' 
+                        ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2)
+                        : user.role === 'Mentor'
+                        ? user.name.split(' ').slice(-2).map(n => n[0]).join('')
+                        : 'A'
+                      }
+                    </AvatarFallback>
+                  </Avatar>
+                </Link>
+              ) : (
+                <Button 
+                  variant="outline" 
+                  className="border-blue-500 text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-full font-medium"
+                  onClick={() => window.location.href = '/login'}
+                >
+                  LOGIN
+                </Button>
+              )}
               <button
                 onClick={() => setIsSideMenuOpen(true)}
                 className="p-2 text-gray-700 hover:text-blue-600"
@@ -107,13 +152,38 @@ const Navigation = () => {
                   Test Portal
                 </a>
                 <div className="flex flex-col space-y-2 px-3 py-2">
-                  <Button 
-                    variant="outline" 
-                    className="border-blue-500 text-blue-600 hover:bg-blue-50 rounded-full"
-                    onClick={() => window.location.href = '/login'}
-                  >
-                    LOGIN
-                  </Button>
+                  {user ? (
+                    <Link to={getDashboardLink()}>
+                      <div className="flex items-center gap-2 p-2">
+                        <Avatar className="h-8 w-8">
+                          <AvatarImage src={user.image} />
+                          <AvatarFallback 
+                            className={`text-white text-sm ${
+                              user.role === 'Student' ? 'bg-blue-600' :
+                              user.role === 'Mentor' ? 'bg-green-600' :
+                              'bg-gray-600'
+                            }`}
+                          >
+                            {user.role === 'Student' 
+                              ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2)
+                              : user.role === 'Mentor'
+                              ? user.name.split(' ').slice(-2).map(n => n[0]).join('')
+                              : 'A'
+                            }
+                          </AvatarFallback>
+                        </Avatar>
+                        <span className="text-sm">{user.name}</span>
+                      </div>
+                    </Link>
+                  ) : (
+                    <Button 
+                      variant="outline" 
+                      className="border-blue-500 text-blue-600 hover:bg-blue-50 rounded-full"
+                      onClick={() => window.location.href = '/login'}
+                    >
+                      LOGIN
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
@@ -149,17 +219,60 @@ const Navigation = () => {
               </button>
             </div>
             <div className="p-4 space-y-2">
-              {sideMenuItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.href}
-                  className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                  onClick={() => setIsSideMenuOpen(false)}
-                >
-                  <item.icon size={20} />
-                  <span>{item.label}</span>
-                </a>
-              ))}
+              {user ? (
+                <>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg mb-4">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src={user.image} />
+                      <AvatarFallback 
+                        className={`text-white ${
+                          user.role === 'Student' ? 'bg-blue-600' :
+                          user.role === 'Mentor' ? 'bg-green-600' :
+                          'bg-gray-600'
+                        }`}
+                      >
+                        {user.role === 'Student' 
+                          ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2)
+                          : user.role === 'Mentor'
+                          ? user.name.split(' ').slice(-2).map(n => n[0]).join('')
+                          : 'A'
+                        }
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="font-medium">{user.name}</p>
+                      <p className="text-sm text-gray-600">{user.role}</p>
+                    </div>
+                  </div>
+                  <Link
+                    to={getDashboardLink()}
+                    className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                    onClick={() => setIsSideMenuOpen(false)}
+                  >
+                    <User size={20} />
+                    <span>Dashboard</span>
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center space-x-3 p-3 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  >
+                    <User size={20} />
+                    <span>Logout</span>
+                  </button>
+                </>
+              ) : (
+                sideMenuItems.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.href}
+                    className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                    onClick={() => setIsSideMenuOpen(false)}
+                  >
+                    <item.icon size={20} />
+                    <span>{item.label}</span>
+                  </a>
+                ))
+              )}
             </div>
           </div>
         </div>

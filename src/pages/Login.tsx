@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Eye, EyeOff, Mail, Lock, ArrowLeft, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "@/contexts/UserContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,11 +18,53 @@ const Login = () => {
     companyCode: "",
     rememberMe: false
   });
+  
+  const { login } = useUser();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login attempt:", { ...formData, role: selectedRole });
-    // Add login logic here
+    
+    // Simple validation - in real app, you'd validate against a backend
+    if (!formData.email || !formData.password) {
+      alert("Please fill in all required fields");
+      return;
+    }
+
+    if (selectedRole === "Admin" && !formData.companyCode) {
+      alert("Company code is required for admin login");
+      return;
+    }
+
+    if ((selectedRole === "Mentor" || selectedRole === "Admin") && !formData.name) {
+      alert("Name is required for mentor/admin login");
+      return;
+    }
+
+    // Create user object
+    const userData = {
+      name: formData.name || formData.email.split('@')[0],
+      email: formData.email,
+      role: selectedRole as 'Student' | 'Mentor' | 'Admin'
+    };
+
+    // Login user
+    login(userData);
+
+    // Redirect based on role
+    switch (selectedRole) {
+      case "Student":
+        navigate("/student-dashboard");
+        break;
+      case "Mentor":
+        navigate("/mentor-dashboard");
+        break;
+      case "Admin":
+        navigate("/admin-dashboard");
+        break;
+      default:
+        navigate("/");
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
