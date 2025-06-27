@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User, BookOpen, MessageCircle, Users, HelpCircle, Shield, FileText, Phone } from "lucide-react";
@@ -7,7 +8,7 @@ const Navigation = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   const sideMenuItems = [
-    { icon: User, label: "Login/Signup", href: "/role-login" },
+    { icon: User, label: "Login/Signup", href: "/login" },
     { icon: Users, label: "Our Mentors", href: "#" },
     { icon: BookOpen, label: "Mentorship Plans", href: "#" },
     { icon: FileText, label: "Blogs", href: "/blogs" },
@@ -66,7 +67,7 @@ const Navigation = () => {
               <Button 
                 variant="outline" 
                 className="border-blue-500 text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-full font-medium"
-                onClick={() => window.location.href = '/role-login'}
+                onClick={() => window.location.href = '/login'}
               >
                 LOGIN
               </Button>
@@ -109,7 +110,7 @@ const Navigation = () => {
                   <Button 
                     variant="outline" 
                     className="border-blue-500 text-blue-600 hover:bg-blue-50 rounded-full"
-                    onClick={() => window.location.href = '/role-login'}
+                    onClick={() => window.location.href = '/login'}
                   >
                     LOGIN
                   </Button>
