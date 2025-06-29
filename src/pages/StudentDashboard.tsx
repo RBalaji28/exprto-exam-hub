@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -50,23 +51,6 @@ const StudentDashboard = () => {
       mentor: "Sneha Gupta",
       date: "2024-01-27",
       time: "2:00 PM"
-    }
-  ];
-
-  const availableSessions = [
-    {
-      title: "JEE Advanced Strategy",
-      mentor: "Arjun Mehta",
-      date: "Jan 25, 2024",
-      time: "10:00 AM",
-      slots: "6/10 slots"
-    },
-    {
-      title: "JEE Advanced Strategy",
-      mentor: "Arjun Mehta",
-      date: "Jan 25, 2024",
-      time: "10:00 AM",
-      slots: "6/10 slots"
     }
   ];
 
@@ -123,7 +107,7 @@ const StudentDashboard = () => {
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back, {studentName.split(' ')[0]}!</h2>
-          <p className="text-gray-600">Continue your learning journey with our expert mentors.</p>
+          <p className="text-gray-600">Track your learning progress and manage your booked sessions.</p>
         </div>
 
         {/* Stats Cards */}
@@ -157,101 +141,83 @@ const StudentDashboard = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Available Sessions */}
-          <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Available Sessions</CardTitle>
-                <p className="text-sm text-gray-600">Book sessions with expert mentors</p>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {availableSessions.map((session, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
-                    <div>
-                      <h4 className="font-medium">{session.title}</h4>
-                      <p className="text-sm text-gray-600">by {session.mentor}</p>
-                      <p className="text-sm text-gray-500">{session.date} • {session.time}</p>
-                    </div>
-                    <div className="text-right">
-                      <Badge variant="outline" className="text-green-600 border-green-600 mb-2">
-                        {session.slots}
-                      </Badge>
-                      <Button className="w-full bg-gray-900 hover:bg-gray-800">
-                        Book Session
-                      </Button>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Past Sessions */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Past Sessions</CardTitle>
+              <p className="text-sm text-gray-600">Your completed sessions</p>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {pastSessions.map((session, index) => (
+                  <div key={index} className="p-4 border rounded-lg">
+                    <div className="grid grid-cols-3 gap-4">
+                      <div>
+                        <p className="font-medium">{session.session}</p>
+                        <p className="text-sm text-gray-600">{session.mentor}</p>
+                      </div>
+                      <div className="text-gray-600 text-sm">
+                        {session.date}
+                      </div>
+                      <div>
+                        <Badge variant="outline" className="text-green-600 border-green-600">
+                          {session.status}
+                        </Badge>
+                      </div>
                     </div>
                   </div>
                 ))}
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
 
-          {/* Right Sidebar */}
-          <div className="space-y-6">
-            {/* Past Sessions */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Past Sessions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {pastSessions.map((session, index) => (
-                    <div key={index} className="space-y-2">
-                      <div className="flex justify-between">
-                        <span className="font-medium text-sm">Session</span>
-                        <span className="font-medium text-sm">Date</span>
-                        <span className="font-medium text-sm">Status</span>
+          {/* Upcoming Sessions */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Upcoming Sessions</CardTitle>
+              <p className="text-sm text-gray-600">Your scheduled sessions</p>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {upcomingSessions.map((session, index) => (
+                  <div key={index} className="p-4 border rounded-lg">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <p className="font-medium">{session.session}</p>
+                        <p className="text-sm text-gray-600">{session.mentor}</p>
                       </div>
-                      <div className="grid grid-cols-3 gap-2 text-sm">
-                        <div>
-                          <p className="font-medium">{session.session}</p>
-                          <p className="text-gray-600">{session.mentor}</p>
-                        </div>
-                        <div className="text-gray-600">
-                          {session.date}
-                        </div>
-                        <div>
-                          <Badge variant="outline" className="text-green-600 border-green-600">
-                            {session.status}
-                          </Badge>
-                        </div>
+                      <div className="text-gray-600 text-sm">
+                        <p>{session.date}</p>
+                        <p>{session.time}</p>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-            {/* Upcoming Sessions */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Upcoming Sessions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {upcomingSessions.map((session, index) => (
-                    <div key={index} className="space-y-2">
-                      <div className="flex justify-between">
-                        <span className="font-medium text-sm">Session</span>
-                        <span className="font-medium text-sm">Date & Time</span>
-                      </div>
-                      <div className="grid grid-cols-2 gap-2 text-sm">
-                        <div>
-                          <p className="font-medium">{session.session}</p>
-                          <p className="text-gray-600">{session.mentor}</p>
-                        </div>
-                        <div className="text-gray-600">
-                          <p>{session.date}</p>
-                          <p>{session.time}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+        {/* Quick Actions */}
+        <div className="mt-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Quick Actions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex gap-4">
+                <Link to="/booking-sessions">
+                  <Button className="bg-blue-600 hover:bg-blue-700">
+                    Book New Session
+                  </Button>
+                </Link>
+                <Button variant="outline">
+                  View All Sessions
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </main>
     </div>
