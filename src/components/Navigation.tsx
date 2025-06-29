@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -10,6 +9,20 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const { user, logout } = useUser();
+
+  const getDashboardLink = () => {
+    if (!user) return "/";
+    switch (user.role) {
+      case "Student":
+        return "/student-dashboard";
+      case "Mentor":
+        return "/mentor-dashboard";
+      case "Admin":
+        return "/admin-dashboard";
+      default:
+        return "/";
+    }
+  };
 
   const sideMenuItems = [
     { icon: User, label: "Login/Signup", href: "/login" },
@@ -44,20 +57,6 @@ const Navigation = () => {
   const handleLogout = () => {
     logout();
     setIsSideMenuOpen(false);
-  };
-
-  const getDashboardLink = () => {
-    if (!user) return "/";
-    switch (user.role) {
-      case "Student":
-        return "/student-dashboard";
-      case "Mentor":
-        return "/mentor-dashboard";
-      case "Admin":
-        return "/admin-dashboard";
-      default:
-        return "/";
-    }
   };
 
   return (
