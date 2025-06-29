@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,17 +5,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { LogOut, Calendar, Users, DollarSign, Camera } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useUser } from "@/contexts/UserContext";
 
 const StudentDashboard = () => {
-  const [studentImage, setStudentImage] = useState<string | null>(null);
-  const studentName = "John Doe";
+  const { user, updateUserImage } = useUser();
+  const studentName = user?.name || "Student";
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setStudentImage(e.target?.result as string);
+        const imageUrl = e.target?.result as string;
+        updateUserImage(imageUrl);
       };
       reader.readAsDataURL(file);
     }
@@ -76,16 +77,16 @@ const StudentDashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-4">
-              {/* Image Upload */}
+              {/* Large Image Upload */}
               <div className="relative">
-                <Avatar className="h-12 w-12">
-                  <AvatarImage src={studentImage || undefined} />
-                  <AvatarFallback className="bg-blue-100 text-blue-600">
+                <Avatar className="h-16 w-16">
+                  <AvatarImage src={user?.image} />
+                  <AvatarFallback className="bg-blue-100 text-blue-600 text-xl">
                     {studentName.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
-                <label className="absolute -bottom-1 -right-1 bg-blue-600 text-white p-1 rounded-full cursor-pointer hover:bg-blue-700">
-                  <Camera size={12} />
+                <label className="absolute -bottom-2 -right-2 bg-blue-600 text-white p-2 rounded-full cursor-pointer hover:bg-blue-700 shadow-lg">
+                  <Camera size={16} />
                   <input
                     type="file"
                     accept="image/*"
@@ -99,7 +100,7 @@ const StudentDashboard = () => {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src={studentImage || undefined} />
+                  <AvatarImage src={user?.image} />
                   <AvatarFallback className="bg-blue-100 text-blue-600 text-sm">
                     {studentName.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
@@ -121,7 +122,7 @@ const StudentDashboard = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back, John!</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back, {studentName.split(' ')[0]}!</h2>
           <p className="text-gray-600">Continue your learning journey with our expert mentors.</p>
         </div>
 

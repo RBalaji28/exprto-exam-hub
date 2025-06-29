@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,20 +50,8 @@ const Login = () => {
     // Login user
     login(userData);
 
-    // Redirect based on role
-    switch (selectedRole) {
-      case "Student":
-        navigate("/student-dashboard");
-        break;
-      case "Mentor":
-        navigate("/mentor-dashboard");
-        break;
-      case "Admin":
-        navigate("/admin-dashboard");
-        break;
-      default:
-        navigate("/");
-    }
+    // Always redirect to home page after login
+    navigate("/");
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
