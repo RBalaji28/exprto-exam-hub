@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { UserCheck, Calendar, CreditCard, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const GetStarted = () => {
   const steps = [
@@ -43,12 +44,14 @@ const GetStarted = () => {
               In just 4 simple steps you can become an elite member of our MentxTv family.
             </p>
             
-            <Button 
-              size="lg"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Take a Trial Session
-            </Button>
+            <Link to="/booking-sessions">
+              <Button 
+                size="lg"
+                className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Take a Trial Session
+              </Button>
+            </Link>
           </div>
 
           {/* Right Content - Steps */}

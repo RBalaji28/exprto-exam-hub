@@ -26,6 +26,21 @@ const Navigation = () => {
     { icon: Shield, label: "Privacy Policy", href: "#" },
   ];
 
+  const loggedInSideMenuItems = [
+    { icon: User, label: "Dashboard", href: getDashboardLink() },
+    { icon: Users, label: "Our Mentors", href: "#" },
+    { icon: BookOpen, label: "Mentorship Plans", href: "#" },
+    { icon: FileText, label: "Blogs", href: "/blogs" },
+    { icon: Users, label: "Become a mentor", href: "/become-mentor" },
+    { icon: Users, label: "About Us", href: "#" },
+    { icon: Users, label: "Our Team", href: "#" },
+    { icon: Phone, label: "Contact Us", href: "#" },
+    { icon: HelpCircle, label: "FAQ's", href: "#" },
+    { icon: Shield, label: "Future Nurture", href: "#" },
+    { icon: FileText, label: "Terms and Conditions", href: "#" },
+    { icon: Shield, label: "Privacy Policy", href: "#" },
+  ];
+
   const handleLogout = () => {
     logout();
     setIsSideMenuOpen(false);
@@ -81,6 +96,9 @@ const Navigation = () => {
                 </a>
                 <a href="/test-portal" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
                   Test Portal
+                </a>
+                <a href="/booking-sessions" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+                  Booking Sessions
                 </a>
               </div>
             </div>
@@ -150,6 +168,9 @@ const Navigation = () => {
                 </a>
                 <a href="/test-portal" className="text-gray-700 block px-3 py-2 text-base font-medium">
                   Test Portal
+                </a>
+                <a href="/booking-sessions" className="text-gray-700 block px-3 py-2 text-base font-medium">
+                  Booking Sessions
                 </a>
                 <div className="flex flex-col space-y-2 px-3 py-2">
                   {user ? (
@@ -244,14 +265,17 @@ const Navigation = () => {
                       <p className="text-sm text-gray-600">{user.role}</p>
                     </div>
                   </div>
-                  <Link
-                    to={getDashboardLink()}
-                    className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                    onClick={() => setIsSideMenuOpen(false)}
-                  >
-                    <User size={20} />
-                    <span>Dashboard</span>
-                  </Link>
+                  {loggedInSideMenuItems.map((item, index) => (
+                    <Link
+                      key={index}
+                      to={item.href}
+                      className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                      onClick={() => setIsSideMenuOpen(false)}
+                    >
+                      <item.icon size={20} />
+                      <span>{item.label}</span>
+                    </Link>
+                  ))}
                   <button
                     onClick={handleLogout}
                     className="w-full flex items-center space-x-3 p-3 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
@@ -262,15 +286,15 @@ const Navigation = () => {
                 </>
               ) : (
                 sideMenuItems.map((item, index) => (
-                  <a
+                  <Link
                     key={index}
-                    href={item.href}
+                    to={item.href}
                     className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                     onClick={() => setIsSideMenuOpen(false)}
                   >
                     <item.icon size={20} />
                     <span>{item.label}</span>
-                  </a>
+                  </Link>
                 ))
               )}
             </div>

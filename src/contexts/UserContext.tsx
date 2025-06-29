@@ -8,17 +8,26 @@ interface User {
   image?: string;
 }
 
+interface SocialMediaLinks {
+  instagram?: string;
+  twitter?: string;
+  youtube?: string;
+}
+
 interface UserContextType {
   user: User | null;
+  socialMediaLinks: SocialMediaLinks;
   login: (userData: User) => void;
   logout: () => void;
   updateUserImage: (image: string) => void;
+  updateSocialMediaLinks: (links: SocialMediaLinks) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [socialMediaLinks, setSocialMediaLinks] = useState<SocialMediaLinks>({});
 
   const login = (userData: User) => {
     setUser(userData);
@@ -34,8 +43,19 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
+  const updateSocialMediaLinks = (links: SocialMediaLinks) => {
+    setSocialMediaLinks(links);
+  };
+
   return (
-    <UserContext.Provider value={{ user, login, logout, updateUserImage }}>
+    <UserContext.Provider value={{ 
+      user, 
+      socialMediaLinks, 
+      login, 
+      logout, 
+      updateUserImage, 
+      updateSocialMediaLinks 
+    }}>
       {children}
     </UserContext.Provider>
   );
