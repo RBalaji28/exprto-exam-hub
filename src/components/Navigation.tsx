@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -26,7 +27,6 @@ const Navigation = () => {
 
   const sideMenuItems = [
     { icon: User, label: "Login/Signup", href: "/login" },
-    { icon: BookOpen, label: "Mentorship Plans", href: "#" },
     { icon: FileText, label: "Blogs", href: "/blogs" },
     { icon: Users, label: "Become a mentor", href: "/become-mentor" },
     { icon: Users, label: "About Us", href: "#" },
@@ -37,7 +37,6 @@ const Navigation = () => {
 
   const loggedInSideMenuItems = [
     { icon: User, label: "Dashboard", href: getDashboardLink() },
-    { icon: BookOpen, label: "Mentorship Plans", href: "#" },
     { icon: FileText, label: "Blogs", href: "/blogs" },
     { icon: Users, label: "Become a mentor", href: "/become-mentor" },
     { icon: Users, label: "About Us", href: "#" },
@@ -206,7 +205,7 @@ const Navigation = () => {
       {/* Side Menu Overlay */}
       {isSideMenuOpen && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50">
-          <div className="fixed right-0 top-0 h-full w-80 bg-white shadow-lg">
+          <div className="fixed right-0 top-0 h-[60vh] w-80 bg-white shadow-lg rounded-bl-lg">
             <div className="flex justify-between items-center p-4 border-b">
               <div className="flex items-center gap-2">
                 <img 
@@ -230,7 +229,7 @@ const Navigation = () => {
                 <X size={24} />
               </button>
             </div>
-            <div className="p-4 space-y-2">
+            <div className="p-4 space-y-2 overflow-y-auto max-h-full">
               {user ? (
                 <>
                   <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg mb-4">
