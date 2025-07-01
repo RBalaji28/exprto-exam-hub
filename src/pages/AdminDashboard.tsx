@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,13 +7,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LogOut, Instagram, Twitter, Youtube, Save, Plus, Eye, Edit, Trash2, Star } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { LogOut, Instagram, Twitter, Youtube, Save, Plus, Eye, Edit, Trash2, Star, Camera } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useUser } from "@/contexts/UserContext";
 import { toast } from "sonner";
 
 const AdminDashboard = () => {
   const { socialMediaLinks, updateSocialMediaLinks } = useUser();
+  const [adminImage, setAdminImage] = useState<string | null>(null);
+  const adminName = "Admin User";
   const [links, setLinks] = useState({
     instagram: socialMediaLinks.instagram || '',
     twitter: socialMediaLinks.twitter || '',
@@ -51,6 +53,17 @@ const AdminDashboard = () => {
     { id: 'E002', mentorName: 'Hritishna Nayak', mentorId: 'M003', subject: 'NEET', studentsAttended: 8, feedbackCollected: false }
   ]);
 
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setAdminImage(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleInputChange = (platform: string, value: string) => {
     setLinks(prev => ({
       ...prev,
@@ -79,9 +92,37 @@ const AdminDashboard = () => {
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <h1 className="text-xl font-semibold text-gray-900">Admin Dashboard</h1>
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-700">Admin User</span>
+              {/* Admin Image Upload */}
+              <div className="relative">
+                <Avatar className="h-12 w-12">
+                  <AvatarImage src={adminImage || undefined} />
+                  <AvatarFallback className="bg-purple-100 text-purple-600">
+                    {adminName.split(' ').map(n => n[0]).join('')}
+                  </AvatarFallback>
+                </Avatar>
+                <label className="absolute -bottom-1 -right-1 bg-purple-600 text-white p-1 rounded-full cursor-pointer hover:bg-purple-700">
+                  <Camera size={12} />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
+                </label>
+              </div>
+              <h1 className="text-xl font-semibold text-gray-900">Admin Dashboard</h1>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <Avatar className="h-8 w-8">
+                  <AvatarImage src={adminImage || undefined} />
+                  <AvatarFallback className="bg-purple-100 text-purple-600 text-sm">
+                    {adminName.split(' ').map(n => n[0]).join('')}
+                  </AvatarFallback>
+                </Avatar>
+                <span className="text-sm text-gray-700">{adminName}</span>
+              </div>
               <Link to="/">
                 <Button variant="outline" size="sm" className="flex items-center gap-2">
                   <LogOut size={16} />
