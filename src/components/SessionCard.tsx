@@ -41,15 +41,13 @@ const SessionCard = ({
       <CardContent className="p-6 space-y-4 flex-1 flex flex-col">
         <div className="space-y-3">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="font-semibold text-lg leading-tight">{title}</h3>
-            <div className="text-right">
-              <Badge 
-                variant="outline" 
-                className="text-green-600 border-green-600 mb-1 text-xs px-2 py-1"
-              >
-                {slotsText} slots
-              </Badge>
-            </div>
+            <h3 className="font-semibold text-lg leading-tight flex-1">{title}</h3>
+            <Badge 
+              variant="outline" 
+              className="text-green-600 border-green-600 text-xs px-3 py-1 font-medium whitespace-nowrap"
+            >
+              {slotsText} slots
+            </Badge>
           </div>
           
           <p className="text-gray-600 text-sm">by {mentor}</p>
