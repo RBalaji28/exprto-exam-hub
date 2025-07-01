@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,7 +15,6 @@ const Login = () => {
     name: "",
     email: "",
     password: "",
-    companyCode: "",
     rememberMe: false
   });
   
@@ -30,13 +30,8 @@ const Login = () => {
       return;
     }
 
-    if (selectedRole === "Admin" && !formData.companyCode) {
-      alert("Company code is required for admin login");
-      return;
-    }
-
-    if ((selectedRole === "Mentor" || selectedRole === "Admin") && !formData.name) {
-      alert("Name is required for mentor/admin login");
+    if (selectedRole === "Mentor" && !formData.name) {
+      alert("Name is required for mentor login");
       return;
     }
 
@@ -100,13 +95,12 @@ const Login = () => {
                   <SelectContent className="bg-white">
                     <SelectItem value="Student">Student</SelectItem>
                     <SelectItem value="Mentor">Mentor</SelectItem>
-                    <SelectItem value="Admin">Admin</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
-              {/* Name Field - Show for Mentor and Admin */}
-              {(selectedRole === "Mentor" || selectedRole === "Admin") && (
+              {/* Name Field - Show for Mentor */}
+              {selectedRole === "Mentor" && (
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium text-gray-700">
                     Name
@@ -146,25 +140,6 @@ const Login = () => {
                   />
                 </div>
               </div>
-
-              {/* Company Code - Show only for Admin */}
-              {selectedRole === "Admin" && (
-                <div className="space-y-2">
-                  <label htmlFor="companyCode" className="text-sm font-medium text-gray-700">
-                    Company Code
-                  </label>
-                  <Input
-                    id="companyCode"
-                    name="companyCode"
-                    type="text"
-                    placeholder="Enter company code"
-                    value={formData.companyCode}
-                    onChange={handleInputChange}
-                    className="h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-              )}
 
               {/* Password Field */}
               <div className="space-y-2">

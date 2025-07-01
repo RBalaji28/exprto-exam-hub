@@ -26,30 +26,22 @@ const Navigation = () => {
 
   const sideMenuItems = [
     { icon: User, label: "Login/Signup", href: "/login" },
-    { icon: Users, label: "Our Mentors", href: "#" },
     { icon: BookOpen, label: "Mentorship Plans", href: "#" },
     { icon: FileText, label: "Blogs", href: "/blogs" },
     { icon: Users, label: "Become a mentor", href: "/become-mentor" },
     { icon: Users, label: "About Us", href: "#" },
-    { icon: Users, label: "Our Team", href: "#" },
-    { icon: Phone, label: "Contact Us", href: "#" },
     { icon: HelpCircle, label: "FAQ's", href: "#" },
-    { icon: Shield, label: "Future Nurture", href: "#" },
     { icon: FileText, label: "Terms and Conditions", href: "#" },
     { icon: Shield, label: "Privacy Policy", href: "#" },
   ];
 
   const loggedInSideMenuItems = [
     { icon: User, label: "Dashboard", href: getDashboardLink() },
-    { icon: Users, label: "Our Mentors", href: "#" },
     { icon: BookOpen, label: "Mentorship Plans", href: "#" },
     { icon: FileText, label: "Blogs", href: "/blogs" },
     { icon: Users, label: "Become a mentor", href: "/become-mentor" },
     { icon: Users, label: "About Us", href: "#" },
-    { icon: Users, label: "Our Team", href: "#" },
-    { icon: Phone, label: "Contact Us", href: "#" },
     { icon: HelpCircle, label: "FAQ's", href: "#" },
-    { icon: Shield, label: "Future Nurture", href: "#" },
     { icon: FileText, label: "Terms and Conditions", href: "#" },
     { icon: Shield, label: "Privacy Policy", href: "#" },
   ];
