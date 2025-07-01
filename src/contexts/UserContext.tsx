@@ -23,7 +23,7 @@ interface BookedSession {
   duration: string;
   subjects: string[];
   price: number;
-  status: 'upcoming' | 'completed';
+  status: 'upcoming' | 'completed' | 'live';
   paymentStatus: 'pending' | 'paid';
 }
 
@@ -37,6 +37,7 @@ interface UserContextType {
   updateSocialMediaLinks: (links: SocialMediaLinks) => void;
   addBookedSession: (session: BookedSession) => void;
   updateSessionPaymentStatus: (sessionId: string, status: 'pending' | 'paid') => void;
+  updateSessionStatus: (sessionId: string, status: 'upcoming' | 'completed' | 'live') => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -79,6 +80,16 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     );
   };
 
+  const updateSessionStatus = (sessionId: string, status: 'upcoming' | 'completed' | 'live') => {
+    setBookedSessions(prev => 
+      prev.map(session => 
+        session.id === sessionId 
+          ? { ...session, status }
+          : session
+      )
+    );
+  };
+
   return (
     <UserContext.Provider value={{ 
       user, 
@@ -89,7 +100,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       updateUserImage, 
       updateSocialMediaLinks,
       addBookedSession,
-      updateSessionPaymentStatus
+      updateSessionPaymentStatus,
+      updateSessionStatus
     }}>
       {children}
     </UserContext.Provider>
