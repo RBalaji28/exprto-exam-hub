@@ -1,32 +1,44 @@
-
 import { Facebook, Twitter, Youtube, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* About Us */}
-          <div className="lg:col-span-1">
+          <div>
             <h3 className="text-xl font-bold mb-6">About Us</h3>
             <p className="text-gray-300 leading-relaxed">
               A Student driven Mentorship platform. Our vision is to make actionable guidance and mentorship accessible to every student in the world.
             </p>
           </div>
 
-          {/* Top Exams */}
+          {/* Important Links */}
           <div>
-            <h3 className="text-xl font-bold mb-6">Top Exams</h3>
+            <h3 className="text-xl font-bold mb-6">Important Links</h3>
             <div className="space-y-3">
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Main 2024</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Main 2025</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Advanced 2024</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Advanced 2025</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">NEET UG 2024-2025</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">NEET PG 2024-2025</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">SAT | GRE | GMAT | TOEFL | IELTS</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE | NEET Study Abroad</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Board Exam</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For JEE Main</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For JEE Advance</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For NEET UG</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For NEET PG</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship for SAT | GRE | GMAT</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For TOEFL | IELTS</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For JEE | NEET Abroad</a>
+            </div>
+          </div>
+
+          {/* Other Links */}
+          <div>
+            <h3 className="text-xl font-bold mb-6">Other Links</h3>
+            <div className="space-y-3">
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship Plan</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Our Mentor</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Main Mentor</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Advance Mentor</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">NEET Mentor</a>
+              <a href="/become-mentor" className="block text-gray-300 hover:text-blue-400 transition-colors">Become Mentor</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Take a Trial Session</a>
+              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Toppers & Student Community</a>
             </div>
           </div>
 
