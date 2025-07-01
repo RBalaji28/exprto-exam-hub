@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -31,20 +29,20 @@ const Navigation = () => {
     { icon: User, label: "Login/Signup", href: "/login" },
     { icon: FileText, label: "Blogs", href: "/blogs" },
     { icon: Users, label: "Become a mentor", href: "/become-mentor" },
-    { icon: Users, label: "About Us", href: "#" },
-    { icon: HelpCircle, label: "FAQ's", href: "#" },
-    { icon: FileText, label: "Terms and Conditions", href: "#" },
-    { icon: Shield, label: "Privacy Policy", href: "#" },
+    { icon: Users, label: "About Us", href: "/about" },
+    { icon: HelpCircle, label: "FAQ's", href: "/faq" },
+    { icon: FileText, label: "Terms and Conditions", href: "/terms" },
+    { icon: Shield, label: "Privacy Policy", href: "/privacy" },
   ];
 
   const loggedInSideMenuItems = [
     { icon: User, label: "Dashboard", href: getDashboardLink() },
     { icon: FileText, label: "Blogs", href: "/blogs" },
     { icon: Users, label: "Become a mentor", href: "/become-mentor" },
-    { icon: Users, label: "About Us", href: "#" },
-    { icon: HelpCircle, label: "FAQ's", href: "#" },
-    { icon: FileText, label: "Terms and Conditions", href: "#" },
-    { icon: Shield, label: "Privacy Policy", href: "#" },
+    { icon: Users, label: "About Us", href: "/about" },
+    { icon: HelpCircle, label: "FAQ's", href: "/faq" },
+    { icon: FileText, label: "Terms and Conditions", href: "/terms" },
+    { icon: Shield, label: "Privacy Policy", href: "/privacy" },
   ];
 
   const handleLogout = () => {

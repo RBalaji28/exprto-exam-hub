@@ -1,10 +1,16 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { FileText, Shield, Users, Video, CheckCircle, Users2, Award, TrendingUp } from "lucide-react";
 
 const BecomeMentor = () => {
+  // Google Form URL - replace with actual Google Form URL
+  const GOOGLE_FORM_URL = "https://forms.google.com/your-mentor-registration-form";
+
+  const handleRegisterClick = () => {
+    window.open(GOOGLE_FORM_URL, '_blank');
+  };
+
   const steps = [
     {
       icon: FileText,
@@ -80,6 +86,7 @@ const BecomeMentor = () => {
               </p>
               <Button 
                 size="lg"
+                onClick={handleRegisterClick}
                 className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 Register as a Mentor
@@ -116,6 +123,7 @@ const BecomeMentor = () => {
               </p>
               <Button 
                 size="lg"
+                onClick={handleRegisterClick}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 mt-8"
               >
                 Register as a Mentor
@@ -193,6 +201,7 @@ const BecomeMentor = () => {
           <div className="text-center">
             <Button 
               size="lg"
+              onClick={handleRegisterClick}
               className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Register as a Mentor

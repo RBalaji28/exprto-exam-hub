@@ -11,12 +11,6 @@ import {
 const MentorTeam = () => {
   const mentors = [
     {
-      name: "Hritishna Nayak",
-      title: "NEET Topper",
-      institution: "FMMC Hospital,Balasore Odisha",
-      image: "https://images.unsplash.com/photo-1594824020343-d0bd6dc49c33?w=200&h=200&fit=crop&crop=face"
-    },
-    {
       name: "Cihir Reddy",
       title: "JEE Topper",
       institution: "IIT Delhi",

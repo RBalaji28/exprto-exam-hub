@@ -18,6 +18,10 @@ import AdminDashboard from "./pages/AdminDashboard";
 import BookingSessions from "./pages/BookingSessions";
 import Payment from "./pages/Payment";
 import SessionDetails from "./pages/SessionDetails";
+import AboutUs from "./pages/AboutUs";
+import FAQ from "./pages/FAQ";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -43,6 +47,10 @@ const App = () => (
             <Route path="/booking-sessions" element={<BookingSessions />} />
             <Route path="/payment/:sessionId" element={<Payment />} />
             <Route path="/session-details/:sessionId" element={<SessionDetails />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
