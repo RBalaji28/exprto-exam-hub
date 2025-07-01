@@ -17,6 +17,7 @@ import MentorDashboard from "./pages/MentorDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import BookingSessions from "./pages/BookingSessions";
 import Payment from "./pages/Payment";
+import SessionDetails from "./pages/SessionDetails";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/booking-sessions" element={<BookingSessions />} />
             <Route path="/payment/:sessionId" element={<Payment />} />
+            <Route path="/session-details/:sessionId" element={<SessionDetails />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

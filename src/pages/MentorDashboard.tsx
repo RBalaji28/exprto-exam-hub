@@ -198,9 +198,11 @@ const MentorDashboard = () => {
                         </div>
                       </div>
                     </div>
-                    <Button variant="outline" size="sm">
-                      View Details
-                    </Button>
+                    <Link to={`/session-details/L00${index + 1}`}>
+                      <Button variant="outline" size="sm">
+                        View Details
+                      </Button>
+                    </Link>
                   </div>
                 ))}
               </CardContent>
