@@ -1,7 +1,9 @@
 
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Menu, X, User, BookOpen, MessageCircle, Users, HelpCircle, Shield, FileText, Phone } from "lucide-react";
 import { useUser } from "@/contexts/UserContext";
 import { Link } from "react-router-dom";
@@ -205,8 +207,8 @@ const Navigation = () => {
       {/* Side Menu Overlay */}
       {isSideMenuOpen && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50">
-          <div className="fixed right-0 top-0 h-[60vh] w-80 bg-white shadow-lg rounded-bl-lg">
-            <div className="flex justify-between items-center p-4 border-b">
+          <div className="fixed right-0 top-0 h-[60vh] w-80 bg-white shadow-lg rounded-bl-lg flex flex-col">
+            <div className="flex justify-between items-center p-4 border-b flex-shrink-0">
               <div className="flex items-center gap-2">
                 <img 
                   src="/lovable-uploads/5d782425-50a4-4419-8ded-ab9e0ed405cb.png" 
@@ -229,33 +231,54 @@ const Navigation = () => {
                 <X size={24} />
               </button>
             </div>
-            <div className="p-4 space-y-2 overflow-y-auto max-h-full">
-              {user ? (
-                <>
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg mb-4">
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src={user.image} />
-                      <AvatarFallback 
-                        className={`text-white ${
-                          user.role === 'Student' ? 'bg-blue-600' :
-                          user.role === 'Mentor' ? 'bg-green-600' :
-                          'bg-gray-600'
-                        }`}
-                      >
-                        {user.role === 'Student' 
-                          ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2)
-                          : user.role === 'Mentor'
-                          ? user.name.split(' ').slice(-2).map(n => n[0]).join('')
-                          : 'A'
-                        }
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-medium">{user.name}</p>
-                      <p className="text-sm text-gray-600">{user.role}</p>
+            <ScrollArea className="flex-1 p-4">
+              <div className="space-y-2">
+                {user ? (
+                  <>
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg mb-4">
+                      <Avatar className="h-10 w-10">
+                        <AvatarImage src={user.image} />
+                        <AvatarFallback 
+                          className={`text-white ${
+                            user.role === 'Student' ? 'bg-blue-600' :
+                            user.role === 'Mentor' ? 'bg-green-600' :
+                            'bg-gray-600'
+                          }`}
+                        >
+                          {user.role === 'Student' 
+                            ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2)
+                            : user.role === 'Mentor'
+                            ? user.name.split(' ').slice(-2).map(n => n[0]).join('')
+                            : 'A'
+                          }
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-medium">{user.name}</p>
+                        <p className="text-sm text-gray-600">{user.role}</p>
+                      </div>
                     </div>
-                  </div>
-                  {loggedInSideMenuItems.map((item, index) => (
+                    {loggedInSideMenuItems.map((item, index) => (
+                      <Link
+                        key={index}
+                        to={item.href}
+                        className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        onClick={() => setIsSideMenuOpen(false)}
+                      >
+                        <item.icon size={20} />
+                        <span>{item.label}</span>
+                      </Link>
+                    ))}
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center space-x-3 p-3 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    >
+                      <User size={20} />
+                      <span>Logout</span>
+                    </button>
+                  </>
+                ) : (
+                  sideMenuItems.map((item, index) => (
                     <Link
                       key={index}
                       to={item.href}
@@ -265,29 +288,10 @@ const Navigation = () => {
                       <item.icon size={20} />
                       <span>{item.label}</span>
                     </Link>
-                  ))}
-                  <button
-                    onClick={handleLogout}
-                    className="w-full flex items-center space-x-3 p-3 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                  >
-                    <User size={20} />
-                    <span>Logout</span>
-                  </button>
-                </>
-              ) : (
-                sideMenuItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.href}
-                    className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                    onClick={() => setIsSideMenuOpen(false)}
-                  >
-                    <item.icon size={20} />
-                    <span>{item.label}</span>
-                  </Link>
-                ))
-              )}
-            </div>
+                  ))
+                )}
+              </div>
+            </ScrollArea>
           </div>
         </div>
       )}

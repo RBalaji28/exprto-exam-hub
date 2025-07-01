@@ -1,10 +1,11 @@
+
 import { Facebook, Twitter, Youtube, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {/* About Us */}
           <div className="lg:col-span-1">
             <h3 className="text-xl font-bold mb-6">About Us</h3>
@@ -29,45 +30,13 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Important Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-6">Important Links</h3>
-            <div className="space-y-3">
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For JEE Main</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For JEE Advance</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For NEET UG</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For NEET PG</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship for SAT | GRE | GMAT</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For TOEFL | IELTS</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship For JEE | NEET Abroad</a>
-            </div>
-          </div>
-
-          {/* Other Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-6">Other Links</h3>
-            <div className="space-y-3">
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Mentorship Plan</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Our Mentor</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Main Mentor</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">JEE Advance Mentor</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">NEET Mentor</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Become Mentor</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Take a Trial Session</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Toppers & Student Community</a>
-            </div>
-          </div>
-
           {/* Company Links */}
           <div>
             <h3 className="text-xl font-bold mb-6">Company</h3>
             <div className="space-y-3">
               <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">About Us</a>
               <a href="/blogs" className="block text-gray-300 hover:text-blue-400 transition-colors">Blogs</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Our Team</a>
               <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">FAQs</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Future Nurture</a>
-              <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Contact Us</a>
               <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Terms and Conditions</a>
               <a href="#" className="block text-gray-300 hover:text-blue-400 transition-colors">Privacy Policy</a>
             </div>
