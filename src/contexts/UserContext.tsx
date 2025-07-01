@@ -14,13 +14,29 @@ interface SocialMediaLinks {
   youtube?: string;
 }
 
+interface BookedSession {
+  id: string;
+  title: string;
+  mentor: string;
+  date: string;
+  time: string;
+  duration: string;
+  subjects: string[];
+  price: number;
+  status: 'upcoming' | 'completed';
+  paymentStatus: 'pending' | 'paid';
+}
+
 interface UserContextType {
   user: User | null;
   socialMediaLinks: SocialMediaLinks;
+  bookedSessions: BookedSession[];
   login: (userData: User) => void;
   logout: () => void;
   updateUserImage: (image: string) => void;
   updateSocialMediaLinks: (links: SocialMediaLinks) => void;
+  addBookedSession: (session: BookedSession) => void;
+  updateSessionPaymentStatus: (sessionId: string, status: 'pending' | 'paid') => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -28,6 +44,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [socialMediaLinks, setSocialMediaLinks] = useState<SocialMediaLinks>({});
+  const [bookedSessions, setBookedSessions] = useState<BookedSession[]>([]);
 
   const login = (userData: User) => {
     setUser(userData);
@@ -35,6 +52,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const logout = () => {
     setUser(null);
+    setBookedSessions([]);
   };
 
   const updateUserImage = (image: string) => {
@@ -47,14 +65,31 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setSocialMediaLinks(links);
   };
 
+  const addBookedSession = (session: BookedSession) => {
+    setBookedSessions(prev => [...prev, session]);
+  };
+
+  const updateSessionPaymentStatus = (sessionId: string, status: 'pending' | 'paid') => {
+    setBookedSessions(prev => 
+      prev.map(session => 
+        session.id === sessionId 
+          ? { ...session, paymentStatus: status }
+          : session
+      )
+    );
+  };
+
   return (
     <UserContext.Provider value={{ 
       user, 
       socialMediaLinks, 
+      bookedSessions,
       login, 
       logout, 
       updateUserImage, 
-      updateSocialMediaLinks 
+      updateSocialMediaLinks,
+      addBookedSession,
+      updateSessionPaymentStatus
     }}>
       {children}
     </UserContext.Provider>

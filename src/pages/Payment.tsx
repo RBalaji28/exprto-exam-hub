@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,16 +5,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, Clock, Users, Star, Scan, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
+import { useUser } from "@/contexts/UserContext";
 
 const Payment = () => {
   const { sessionId } = useParams();
+  const { addBookedSession, updateSessionPaymentStatus } = useUser();
   const [isScanning, setIsScanning] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
   const [scannerActive, setScannerActive] = useState(false);
 
   // Sample session data - in real app, fetch by sessionId
   const session = {
-    id: sessionId,
+    id: sessionId || "1",
     title: "JEE Advanced Strategy",
     mentor: "Dr. Arjun Mehta",
     date: "Jan 25, 2024",
@@ -28,6 +29,26 @@ const Payment = () => {
     price: 500
   };
 
+  const completePayment = () => {
+    // Add session to user's booked sessions
+    const bookedSession = {
+      id: session.id,
+      title: session.title,
+      mentor: session.mentor,
+      date: session.date,
+      time: session.time,
+      duration: session.duration,
+      subjects: session.subjects,
+      price: session.price,
+      status: 'upcoming' as const,
+      paymentStatus: 'paid' as const
+    };
+    
+    addBookedSession(bookedSession);
+    setPaymentComplete(true);
+    toast.success("Payment successful! Session booked.");
+  };
+
   const startScanner = () => {
     setIsScanning(true);
     setScannerActive(true);
@@ -36,15 +57,13 @@ const Payment = () => {
     setTimeout(() => {
       setIsScanning(false);
       setScannerActive(false);
-      setPaymentComplete(true);
-      toast.success("Payment successful! Session booked.");
+      completePayment();
     }, 3000);
   };
 
   const handleManualPayment = () => {
     // Simulate manual payment process
-    setPaymentComplete(true);
-    toast.success("Payment successful! Session booked.");
+    completePayment();
   };
 
   if (paymentComplete) {

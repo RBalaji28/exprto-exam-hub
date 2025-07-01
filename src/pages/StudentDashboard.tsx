@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { LogOut, Calendar, Users, DollarSign, Camera } from "lucide-react";
+import { LogOut, Calendar, Users, DollarSign, Camera, Video } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useUser } from "@/contexts/UserContext";
 
 const StudentDashboard = () => {
-  const { user, updateUserImage } = useUser();
+  const { user, updateUserImage, bookedSessions } = useUser();
   const studentName = user?.name || "Student";
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,35 +24,9 @@ const StudentDashboard = () => {
     }
   };
 
-  const pastSessions = [
-    {
-      session: "JEE Advanced Strategy",
-      mentor: "Arjun Mehta",
-      date: "2024-01-15",
-      status: "Completed"
-    },
-    {
-      session: "NEET Biology Prep",
-      mentor: "Dr. Priya Sharma",
-      date: "2024-01-10",
-      status: "Completed"
-    }
-  ];
-
-  const upcomingSessions = [
-    {
-      session: "Physics Problem Solving",
-      mentor: "Rahul Kumar",
-      date: "2024-01-25",
-      time: "10:00 AM"
-    },
-    {
-      session: "Chemistry Revision",
-      mentor: "Sneha Gupta",
-      date: "2024-01-27",
-      time: "2:00 PM"
-    }
-  ];
+  // Filter sessions based on status
+  const pastSessions = bookedSessions.filter(session => session.status === 'completed');
+  const upcomingSessions = bookedSessions.filter(session => session.status === 'upcoming');
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -118,7 +92,7 @@ const StudentDashboard = () => {
               <Calendar className="h-4 w-4 text-blue-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">12</div>
+              <div className="text-3xl font-bold">{pastSessions.length}</div>
             </CardContent>
           </Card>
           <Card>
@@ -127,7 +101,7 @@ const StudentDashboard = () => {
               <Users className="h-4 w-4 text-green-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">3</div>
+              <div className="text-3xl font-bold">{upcomingSessions.length}</div>
             </CardContent>
           </Card>
           <Card>
@@ -136,7 +110,7 @@ const StudentDashboard = () => {
               <DollarSign className="h-4 w-4 text-purple-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">₹15,600</div>
+              <div className="text-3xl font-bold">₹{bookedSessions.reduce((total, session) => total + session.price, 0)}</div>
             </CardContent>
           </Card>
         </div>
@@ -150,24 +124,28 @@ const StudentDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {pastSessions.map((session, index) => (
-                  <div key={index} className="p-4 border rounded-lg">
-                    <div className="grid grid-cols-3 gap-4">
-                      <div>
-                        <p className="font-medium">{session.session}</p>
-                        <p className="text-sm text-gray-600">{session.mentor}</p>
-                      </div>
-                      <div className="text-gray-600 text-sm">
-                        {session.date}
-                      </div>
-                      <div>
-                        <Badge variant="outline" className="text-green-600 border-green-600">
-                          {session.status}
-                        </Badge>
+                {pastSessions.length > 0 ? (
+                  pastSessions.map((session, index) => (
+                    <div key={index} className="p-4 border rounded-lg">
+                      <div className="grid grid-cols-3 gap-4">
+                        <div>
+                          <p className="font-medium">{session.title}</p>
+                          <p className="text-sm text-gray-600">{session.mentor}</p>
+                        </div>
+                        <div className="text-gray-600 text-sm">
+                          {session.date}
+                        </div>
+                        <div>
+                          <Badge variant="outline" className="text-green-600 border-green-600">
+                            Completed
+                          </Badge>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className="text-gray-500 text-center py-4">No completed sessions yet</p>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -180,20 +158,35 @@ const StudentDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {upcomingSessions.map((session, index) => (
-                  <div key={index} className="p-4 border rounded-lg">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="font-medium">{session.session}</p>
-                        <p className="text-sm text-gray-600">{session.mentor}</p>
-                      </div>
-                      <div className="text-gray-600 text-sm">
-                        <p>{session.date}</p>
-                        <p>{session.time}</p>
+                {upcomingSessions.length > 0 ? (
+                  upcomingSessions.map((session, index) => (
+                    <div key={index} className="p-4 border rounded-lg">
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <p className="font-medium">{session.title}</p>
+                            <p className="text-sm text-gray-600">{session.mentor}</p>
+                          </div>
+                          <div className="text-gray-600 text-sm">
+                            <p>{session.date}</p>
+                            <p>{session.time}</p>
+                          </div>
+                        </div>
+                        {session.paymentStatus === 'paid' && (
+                          <Button 
+                            className="w-full bg-green-600 hover:bg-green-700 flex items-center gap-2"
+                            onClick={() => window.open('https://meet.google.com/', '_blank')}
+                          >
+                            <Video size={16} />
+                            Open Meeting
+                          </Button>
+                        )}
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className="text-gray-500 text-center py-4">No upcoming sessions</p>
+                )}
               </div>
             </CardContent>
           </Card>
