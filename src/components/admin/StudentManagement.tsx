@@ -23,10 +23,6 @@ const StudentManagement = ({ students }: StudentManagementProps) => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">Student Details</h2>
-        <Button className="flex items-center gap-2">
-          <Plus size={16} />
-          Add New Student
-        </Button>
       </div>
 
       <Card>

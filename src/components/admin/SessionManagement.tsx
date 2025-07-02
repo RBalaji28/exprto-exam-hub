@@ -2,7 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trash2 } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Trash2, Eye } from "lucide-react";
 
 interface LiveSession {
   id: string;
@@ -40,92 +42,145 @@ interface SessionManagementProps {
 const SessionManagement = ({ liveSessions, upcomingSessions, endedSessions }: SessionManagementProps) => {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Session Details</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold">Session Details</h2>
+      </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Live Sessions */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Live Sessions</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {liveSessions.map((session) => (
-              <div key={session.id} className="p-3 border rounded-lg">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-medium">{session.mentorName}</span>
-                  <Badge className="bg-red-100 text-red-800">LIVE</Badge>
-                </div>
-                <div className="text-sm text-gray-600">
-                  <p>Subject: {session.subject}</p>
-                  <p>Students: {session.studentsAttending}</p>
-                </div>
-                <div className="mt-2">
-                  <Button variant="outline" size="sm" className="w-full">
-                    View Details
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+      {/* Filter Section */}
+      <div className="flex gap-4 mb-6">
+        <Select defaultValue="all">
+          <SelectTrigger className="w-48">
+            <SelectValue placeholder="Select Subject" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Subjects</SelectItem>
+            <SelectItem value="jee">JEE</SelectItem>
+            <SelectItem value="neet">NEET</SelectItem>
+            <SelectItem value="upsc">UPSC</SelectItem>
+            <SelectItem value="gate">GATE</SelectItem>
+          </SelectContent>
+        </Select>
 
-        {/* Upcoming Sessions */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Upcoming Sessions</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {upcomingSessions.map((session) => (
-              <div key={session.id} className="p-3 border rounded-lg">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-medium">{session.mentorName}</span>
-                  <Badge variant="outline">UPCOMING</Badge>
-                </div>
-                <div className="text-sm text-gray-600">
-                  <p>Subject: {session.subject}</p>
-                  <p>Registered: {session.studentsRegistered}</p>
-                </div>
-                <div className="mt-2 flex gap-2">
-                  <Button variant="outline" size="sm" className="flex-1">
-                    View
-                  </Button>
-                  {session.canDelete && (
-                    <Button variant="outline" size="sm" className="text-red-600">
-                      <Trash2 size={14} />
+        <Select defaultValue="all">
+          <SelectTrigger className="w-48">
+            <SelectValue placeholder="Select Category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Categories</SelectItem>
+            <SelectItem value="live">Live Session</SelectItem>
+            <SelectItem value="upcoming">Upcoming Session</SelectItem>
+            <SelectItem value="ended">Ended Session</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Live Sessions Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Live Sessions</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Session ID</TableHead>
+                <TableHead>Mentor Name</TableHead>
+                <TableHead>Mentor ID</TableHead>
+                <TableHead>Subject</TableHead>
+                <TableHead>Total Students Present</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {liveSessions.map((session) => (
+                <TableRow key={session.id}>
+                  <TableCell className="font-medium">{session.id}</TableCell>
+                  <TableCell>{session.mentorName}</TableCell>
+                  <TableCell>{session.mentorId}</TableCell>
+                  <TableCell>
+                    <Badge className="bg-red-100 text-red-800">{session.subject}</Badge>
+                  </TableCell>
+                  <TableCell>{session.studentsAttending}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Button variant="outline" size="sm">
+                        <Eye size={14} />
+                      </Button>
+                      <Button variant="outline" size="sm" className="bg-green-100 text-green-800">
+                        Join Live Class
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+
+      {/* Student Details Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Student Details (Live Sessions)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Student Name</TableHead>
+                <TableHead>Student Email</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>Arjun Patel</TableCell>
+                <TableCell>arjun.patel@email.com</TableCell>
+                <TableCell>
+                  <Badge className="bg-green-100 text-green-800">Attending</Badge>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm">
+                      <Eye size={14} />
                     </Button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+                    <Button variant="outline" size="sm" className="text-red-600">
+                      Remove
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Priya Sharma</TableCell>
+                <TableCell>priya.sharma@email.com</TableCell>
+                <TableCell>
+                  <Badge className="bg-red-100 text-red-800">Not Attending</Badge>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm">
+                      <Eye size={14} />
+                    </Button>
+                    <Button variant="outline" size="sm" className="text-red-600">
+                      Remove
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
 
-        {/* Ended Sessions */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Ended Sessions</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {endedSessions.map((session) => (
-              <div key={session.id} className="p-3 border rounded-lg">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-medium">{session.mentorName}</span>
-                  <Badge variant="outline" className="text-gray-600">ENDED</Badge>
-                </div>
-                <div className="text-sm text-gray-600">
-                  <p>Subject: {session.subject}</p>
-                  <p>Attended: {session.studentsAttended}</p>
-                  <p>Feedback: {session.feedbackCollected ? 'Collected' : 'Pending'}</p>
-                </div>
-                <div className="mt-2">
-                  <Button variant="outline" size="sm" className="w-full">
-                    View Details
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+      {/* Quick Navigation */}
+      <div className="flex gap-4 mt-6">
+        <Button className="bg-blue-600 text-white">
+          See Live Class
+        </Button>
+        <Button variant="outline">
+          Total Mentors
+        </Button>
       </div>
     </div>
   );
