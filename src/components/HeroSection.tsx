@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Users, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -21,12 +22,14 @@ const HeroSection = () => {
               </p>
             </div>
             
-            <Button 
-              size="lg"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Grab The Guidance
-            </Button>
+            <Link to="/booking-sessions">
+              <Button 
+                size="lg"
+                className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Grab The Guidance
+              </Button>
+            </Link>
           </div>
 
           {/* Right Content - Stats and Image */}

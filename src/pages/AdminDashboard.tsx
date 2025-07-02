@@ -1,6 +1,9 @@
 
 import { useState } from "react";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import AdminHeader from "@/components/admin/AdminHeader";
+import AdminSidebar from "@/components/admin/AdminSidebar";
 import DashboardStats from "@/components/admin/DashboardStats";
 import MentorManagement from "@/components/admin/MentorManagement";
 import StudentManagement from "@/components/admin/StudentManagement";
@@ -12,6 +15,7 @@ const AdminDashboard = () => {
   // Admin state
   const [adminName] = useState("Admin User");
   const [adminImage, setAdminImage] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Social media links state
   const [socialLinks, setSocialLinks] = useState({
@@ -126,14 +130,32 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <AdminHeader 
-        adminName={adminName}
-        adminImage={adminImage}
-        onImageUpload={handleAdminImageUpload}
+    <div className="min-h-screen bg-gray-50 flex">
+      <AdminSidebar 
+        isOpen={sidebarOpen} 
+        onClose={() => setSidebarOpen(false)} 
       />
+      
+      <div className="flex-1 lg:ml-64">
+        <AdminHeader 
+          adminName={adminName}
+          adminImage={adminImage}
+          onImageUpload={handleAdminImageUpload}
+        />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Mobile menu button */}
+        <div className="lg:hidden p-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setSidebarOpen(true)}
+          >
+            <Menu size={16} className="mr-2" />
+            Menu
+          </Button>
+        </div>
+
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h2>
           <p className="text-gray-600">Manage all aspects of the MentxTv platform.</p>
@@ -170,7 +192,8 @@ const AdminDashboard = () => {
             onSave={handleSocialLinksSave}
           />
         </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };

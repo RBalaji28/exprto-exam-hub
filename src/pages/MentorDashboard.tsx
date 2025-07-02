@@ -148,10 +148,12 @@ const MentorDashboard = () => {
                 <p className="text-sm text-gray-600">Manage your mentoring activities</p>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button className="w-full bg-gray-900 hover:bg-gray-800 flex items-center gap-2">
-                  <Plus size={16} />
-                  Post New Session
-                </Button>
+                <Link to="/post-session">
+                  <Button className="w-full bg-gray-900 hover:bg-gray-800 flex items-center gap-2">
+                    <Plus size={16} />
+                    Post New Session
+                  </Button>
+                </Link>
                 <Button variant="outline" className="w-full flex items-center gap-2">
                   <List size={16} />
                   View All Sessions

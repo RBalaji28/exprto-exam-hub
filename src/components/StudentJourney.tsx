@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { FileText, BookOpen, GraduationCap, ThumbsUp, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const StudentJourney = () => {
   const journeySteps = [
@@ -65,12 +66,14 @@ const StudentJourney = () => {
               ))}
             </div>
 
-            <Button 
-              size="lg"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Start Your Journey Now!
-            </Button>
+            <Link to="/blogs">
+              <Button 
+                size="lg"
+                className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Start Your Journey Now!
+              </Button>
+            </Link>
           </div>
 
           {/* Right Content - Image */}
