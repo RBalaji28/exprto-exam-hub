@@ -51,6 +51,62 @@ const AdminDashboard = () => {
       domain: "NEET",
       rating: 4.9,
       sessions: 38
+    },
+    {
+      id: "M003",
+      name: "Dr. Priya Sharma",
+      domain: "NEET",
+      rating: 4.7,
+      sessions: 52
+    },
+    {
+      id: "M004",
+      name: "Arjun Mehta",
+      domain: "JEE",
+      rating: 4.6,
+      sessions: 32
+    },
+    {
+      id: "M005",
+      name: "Rahul Kumar",
+      domain: "UPSC",
+      rating: 4.7,
+      sessions: 22
+    },
+    {
+      id: "M006",
+      name: "Sneha Gupta",
+      domain: "GATE",
+      rating: 4.5,
+      sessions: 35
+    },
+    {
+      id: "M007",
+      name: "Dr. Amit Patel",
+      domain: "JEE",
+      rating: 4.9,
+      sessions: 67
+    },
+    {
+      id: "M008",
+      name: "Prof. Kavya Singh",
+      domain: "NEET",
+      rating: 4.8,
+      sessions: 41
+    },
+    {
+      id: "M009",
+      name: "Vikram Joshi",
+      domain: "UPSC",
+      rating: 4.4,
+      sessions: 28
+    },
+    {
+      id: "M010",
+      name: "Dr. Meera Reddy",
+      domain: "GATE",
+      rating: 4.6,
+      sessions: 39
     }
   ];
 
@@ -71,6 +127,70 @@ const AdminDashboard = () => {
       domain: "NEET",
       sessionsAttended: 15,
       performance: 92
+    },
+    {
+      id: "S003",
+      name: "Rohit Singh",
+      email: "rohit.singh@email.com",
+      domain: "JEE",
+      sessionsAttended: 8,
+      performance: 78
+    },
+    {
+      id: "S004",
+      name: "Ananya Gupta",
+      email: "ananya.gupta@email.com",
+      domain: "NEET",
+      sessionsAttended: 22,
+      performance: 95
+    },
+    {
+      id: "S005",
+      name: "Vikash Kumar",
+      email: "vikash.kumar@email.com",
+      domain: "UPSC",
+      sessionsAttended: 18,
+      performance: 88
+    },
+    {
+      id: "S006",
+      name: "Kavya Reddy",
+      email: "kavya.reddy@email.com",
+      domain: "GATE",
+      sessionsAttended: 14,
+      performance: 82
+    },
+    {
+      id: "S007",
+      name: "Amit Verma",
+      email: "amit.verma@email.com",
+      domain: "JEE",
+      sessionsAttended: 25,
+      performance: 91
+    },
+    {
+      id: "S008",
+      name: "Neha Joshi",
+      email: "neha.joshi@email.com",
+      domain: "NEET",
+      sessionsAttended: 11,
+      performance: 76
+    },
+    {
+      id: "S009",
+      name: "Ravi Mehta",
+      email: "ravi.mehta@email.com",
+      domain: "UPSC",
+      sessionsAttended: 16,
+      performance: 84
+    },
+    {
+      id: "S010",
+      name: "Srishti Agarwal",
+      email: "srishti.agarwal@email.com",
+      domain: "GATE",
+      sessionsAttended: 20,
+      performance: 89
     }
   ];
 
