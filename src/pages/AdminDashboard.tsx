@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { Menu } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import AdminHeader from "@/components/admin/AdminHeader";
 import AdminSidebar from "@/components/admin/AdminSidebar";
@@ -12,6 +13,9 @@ import SocialMediaSettings from "@/components/admin/SocialMediaSettings";
 import ContentManagement from "@/components/admin/ContentManagement";
 
 const AdminDashboard = () => {
+  const [searchParams] = useSearchParams();
+  const activeTab = searchParams.get('tab');
+  
   // Admin state
   const [adminName] = useState("Admin User");
   const [adminImage, setAdminImage] = useState<string | null>(null);
@@ -156,42 +160,79 @@ const AdminDashboard = () => {
         </div>
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h2>
-          <p className="text-gray-600">Manage all aspects of the MentxTv platform.</p>
-        </div>
+          {!activeTab && (
+            <>
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h2>
+                <p className="text-gray-600">Manage all aspects of the MentxTv platform.</p>
+              </div>
 
-        <DashboardStats 
-          mentorCount={dashboardStats.mentorCount}
-          studentCount={dashboardStats.studentCount}
-          liveSessionCount={dashboardStats.liveSessionCount}
-          upcomingSessionCount={dashboardStats.upcomingSessionCount}
-        />
+              <DashboardStats 
+                mentorCount={dashboardStats.mentorCount}
+                studentCount={dashboardStats.studentCount}
+                liveSessionCount={dashboardStats.liveSessionCount}
+                upcomingSessionCount={dashboardStats.upcomingSessionCount}
+              />
+            </>
+          )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <MentorManagement mentors={mentors} />
-          <StudentManagement students={students} />
-        </div>
+          {activeTab === 'mentors' && (
+            <>
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Mentor Details</h2>
+                <p className="text-gray-600">Manage and monitor mentor performance.</p>
+              </div>
+              <MentorManagement mentors={mentors} />
+            </>
+          )}
 
-        <div className="mb-8">
-          <SessionManagement 
-            liveSessions={sessionData.liveSessions}
-            upcomingSessions={sessionData.upcomingSessions}
-            endedSessions={sessionData.endedSessions}
-          />
-        </div>
+          {activeTab === 'students' && (
+            <>
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Student Details</h2>
+                <p className="text-gray-600">Manage student accounts and track performance.</p>
+              </div>
+              <StudentManagement students={students} />
+            </>
+          )}
 
-        <div className="mb-8">
-          <ContentManagement />
-        </div>
+          {activeTab === 'sessions' && (
+            <>
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Session Details</h2>
+                <p className="text-gray-600">Monitor live, upcoming, and ended sessions.</p>
+              </div>
+              <SessionManagement 
+                liveSessions={sessionData.liveSessions}
+                upcomingSessions={sessionData.upcomingSessions}
+                endedSessions={sessionData.endedSessions}
+              />
+            </>
+          )}
 
-        <div className="mb-8">
-          <SocialMediaSettings 
-            links={socialLinks}
-            onInputChange={handleSocialLinksChange}
-            onSave={handleSocialLinksSave}
-          />
-        </div>
+          {activeTab === 'content' && (
+            <>
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Content Management</h2>
+                <p className="text-gray-600">Manage website content and pages.</p>
+              </div>
+              <ContentManagement />
+            </>
+          )}
+
+          {activeTab === 'social' && (
+            <>
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Social Media</h2>
+                <p className="text-gray-600">Manage social media links and settings.</p>
+              </div>
+              <SocialMediaSettings 
+                links={socialLinks}
+                onInputChange={handleSocialLinksChange}
+                onSave={handleSocialLinksSave}
+              />
+            </>
+          )}
         </main>
       </div>
     </div>
