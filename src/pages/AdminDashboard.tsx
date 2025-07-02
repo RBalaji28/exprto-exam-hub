@@ -9,6 +9,7 @@ import DashboardStats from "@/components/admin/DashboardStats";
 import MentorManagement from "@/components/admin/MentorManagement";
 import StudentManagement from "@/components/admin/StudentManagement";
 import SessionManagement from "@/components/admin/SessionManagement";
+import PaymentManagement from "@/components/admin/PaymentManagement";
 import SocialMediaSettings from "@/components/admin/SocialMediaSettings";
 import ContentManagement from "@/components/admin/ContentManagement";
 
@@ -204,6 +205,38 @@ const AdminDashboard = () => {
         subject: "Physics - Mechanics",
         studentsAttending: 25,
         feedbackGiven: false
+      },
+      {
+        id: "L002",
+        mentorName: "Prof. Raj Kumar",
+        mentorId: "M002",
+        subject: "Chemistry - Organic",
+        studentsAttending: 18,
+        feedbackGiven: false
+      },
+      {
+        id: "L003",
+        mentorName: "Dr. Priya Sharma",
+        mentorId: "M003",
+        subject: "Biology - Cell Biology",
+        studentsAttending: 32,
+        feedbackGiven: true
+      },
+      {
+        id: "L004",
+        mentorName: "Arjun Mehta",
+        mentorId: "M004",
+        subject: "Mathematics - Algebra",
+        studentsAttending: 28,
+        feedbackGiven: false
+      },
+      {
+        id: "L005",
+        mentorName: "Rahul Kumar",
+        mentorId: "M005",
+        subject: "History - Ancient India",
+        studentsAttending: 15,
+        feedbackGiven: true
       }
     ],
     upcomingSessions: [
@@ -227,6 +260,90 @@ const AdminDashboard = () => {
       }
     ]
   };
+
+  // Mock data for payments
+  const payments = [
+    {
+      id: "P001",
+      studentName: "Arjun Patel",
+      email: "arjun.patel@email.com",
+      domain: "JEE",
+      sessionId: "L001",
+      amount: 500,
+      status: "Completed",
+      paymentDate: "2024-01-15"
+    },
+    {
+      id: "P002",
+      studentName: "Priya Sharma",
+      email: "priya.sharma@email.com",
+      domain: "NEET",
+      sessionId: "L002",
+      amount: 750,
+      status: "Completed",
+      paymentDate: "2024-01-16"
+    },
+    {
+      id: "P003",
+      studentName: "Rohit Singh",
+      email: "rohit.singh@email.com",
+      domain: "JEE",
+      sessionId: "L003",
+      amount: 600,
+      status: "Pending",
+      paymentDate: "2024-01-17"
+    },
+    {
+      id: "P004",
+      studentName: "Ananya Gupta",
+      email: "ananya.gupta@email.com",
+      domain: "NEET",
+      sessionId: "L004",
+      amount: 800,
+      status: "Completed",
+      paymentDate: "2024-01-18"
+    },
+    {
+      id: "P005",
+      studentName: "Vikash Kumar",
+      email: "vikash.kumar@email.com",
+      domain: "UPSC",
+      sessionId: "L005",
+      amount: 650,
+      status: "Failed",
+      paymentDate: "2024-01-19"
+    },
+    {
+      id: "P006",
+      studentName: "Kavya Reddy",
+      email: "kavya.reddy@email.com",
+      domain: "GATE",
+      sessionId: "L001",
+      amount: 550,
+      status: "Completed",
+      paymentDate: "2024-01-20"
+    },
+    {
+      id: "P007",
+      studentName: "Amit Verma",
+      email: "amit.verma@email.com",
+      domain: "JEE",
+      sessionId: "L002",
+      amount: 700,
+      status: "Completed",
+      paymentDate: "2024-01-21"
+    },
+    {
+      id: "P008",
+      studentName: "Neha Joshi",
+      email: "neha.joshi@email.com",
+      domain: "NEET",
+      sessionId: "L003",
+      amount: 620,
+      status: "Pending",
+      paymentDate: "2024-01-22"
+    }
+  ];
 
   // Handler functions
   const handleAdminImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -337,6 +454,16 @@ const AdminDashboard = () => {
                 <p className="text-gray-600">Manage website content and pages.</p>
               </div>
               <ContentManagement />
+            </>
+          )}
+
+          {activeTab === 'payments' && (
+            <>
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Payment Details</h2>
+                <p className="text-gray-600">Monitor student payments and transaction history.</p>
+              </div>
+              <PaymentManagement payments={payments} />
             </>
           )}
 

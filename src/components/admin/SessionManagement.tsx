@@ -106,6 +106,9 @@ const SessionManagement = ({ liveSessions, upcomingSessions, endedSessions }: Se
                       <Button variant="outline" size="sm">
                         <Eye size={14} />
                       </Button>
+                      <Button variant="outline" size="sm" className="bg-blue-100 text-blue-800">
+                        View Details
+                      </Button>
                       <Button variant="outline" size="sm" className="bg-green-100 text-green-800">
                         Join Live Class
                       </Button>

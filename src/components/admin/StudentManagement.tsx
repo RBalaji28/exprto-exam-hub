@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Eye, Trash2 } from "lucide-react";
 
 interface Student {
@@ -23,6 +24,22 @@ const StudentManagement = ({ students }: StudentManagementProps) => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">Student Details</h2>
+      </div>
+
+      {/* Filter Section */}
+      <div className="flex gap-4 mb-6">
+        <Select defaultValue="all">
+          <SelectTrigger className="w-48">
+            <SelectValue placeholder="Select Domain" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Domains</SelectItem>
+            <SelectItem value="jee">JEE</SelectItem>
+            <SelectItem value="neet">NEET</SelectItem>
+            <SelectItem value="upsc">UPSC</SelectItem>
+            <SelectItem value="gate">GATE</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <Card>
