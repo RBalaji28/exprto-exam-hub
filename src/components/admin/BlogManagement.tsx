@@ -21,12 +21,6 @@ interface SocialMediaLinks {
 const BlogManagement = () => {
   const { blogs, addBlog, deleteBlog } = useBlog();
 
-  const [socialMediaLinks, setSocialMediaLinks] = useState<SocialMediaLinks>({
-    instagram: "https://instagram.com/mentxtv",
-    twitter: "https://twitter.com/mentxtv",
-    linkedin: "https://linkedin.com/company/mentxtv"
-  });
-
   const [newBlog, setNewBlog] = useState<Partial<BlogPost>>({
     title: "",
     content: "",
@@ -41,7 +35,7 @@ const BlogManagement = () => {
     }
   });
 
-  const [previewMode, setPreviewMode] = useState(false);
+  const [currentStep, setCurrentStep] = useState<'thumbnail' | 'content'>('thumbnail');
   const [editingBlog, setEditingBlog] = useState<string | null>(null);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,6 +85,7 @@ const BlogManagement = () => {
         linkedin: ""
       }
     });
+    setCurrentStep('thumbnail');
     toast.success("Blog post created successfully!");
   };
 
@@ -99,8 +94,18 @@ const BlogManagement = () => {
     toast.success("Blog post deleted successfully!");
   };
 
-  const handleUpdateSocialMedia = () => {
-    toast.success("Social media links updated successfully!");
+  const handleNextStep = () => {
+    if (currentStep === 'thumbnail') {
+      if (!newBlog.title || !newBlog.category || !newBlog.image) {
+        toast.error("Please fill in title, category, and upload an image for the thumbnail");
+        return;
+      }
+      setCurrentStep('content');
+    }
+  };
+
+  const handlePreviousStep = () => {
+    setCurrentStep('thumbnail');
   };
 
   const BlogPreview = ({ blog }: { blog: Partial<BlogPost> }) => (
@@ -150,6 +155,18 @@ const BlogManagement = () => {
               <DialogTitle>Create New Blog Post</DialogTitle>
             </DialogHeader>
             
+            <div className="mb-4">
+              <div className="flex items-center gap-4 mb-6">
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-lg ${currentStep === 'thumbnail' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600'}`}>
+                  <span className="font-medium">1. Create Thumbnail</span>
+                </div>
+                <div className="flex-1 h-0.5 bg-gray-200"></div>
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-lg ${currentStep === 'content' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600'}`}>
+                  <span className="font-medium">2. Add Content</span>
+                </div>
+              </div>
+            </div>
+
             <Tabs defaultValue="edit" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="edit">Edit</TabsTrigger>
@@ -157,160 +174,189 @@ const BlogManagement = () => {
               </TabsList>
               
               <TabsContent value="edit" className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="title">Title *</Label>
-                    <Input
-                      id="title"
-                      placeholder="Blog post title"
-                      value={newBlog.title}
-                      onChange={(e) => setNewBlog(prev => ({ ...prev, title: e.target.value }))}
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="category">Category *</Label>
-                    <Select
-                      value={newBlog.category}
-                      onValueChange={(value) => setNewBlog(prev => ({ ...prev, category: value }))}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Education">Education</SelectItem>
-                        <SelectItem value="Sports">Sports</SelectItem>
-                        <SelectItem value="Technology">Technology</SelectItem>
-                        <SelectItem value="Health">Health</SelectItem>
-                        <SelectItem value="Lifestyle">Lifestyle</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
+                {currentStep === 'thumbnail' && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-900">Step 1: Create Thumbnail</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="title">Title *</Label>
+                        <Input
+                          id="title"
+                          placeholder="Blog post title"
+                          value={newBlog.title}
+                          onChange={(e) => setNewBlog(prev => ({ ...prev, title: e.target.value }))}
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="category">Category *</Label>
+                        <Select
+                          value={newBlog.category}
+                          onValueChange={(value) => setNewBlog(prev => ({ ...prev, category: value }))}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select category" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Education">Education</SelectItem>
+                            <SelectItem value="Sports">Sports</SelectItem>
+                            <SelectItem value="Technology">Technology</SelectItem>
+                            <SelectItem value="Health">Health</SelectItem>
+                            <SelectItem value="Lifestyle">Lifestyle</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="author">Author</Label>
-                    <Input
-                      id="author"
-                      placeholder="Author name"
-                      value={newBlog.author}
-                      onChange={(e) => setNewBlog(prev => ({ ...prev, author: e.target.value }))}
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="status">Status</Label>
-                    <Select
-                      value={newBlog.status}
-                      onValueChange={(value: 'draft' | 'published') => setNewBlog(prev => ({ ...prev, status: value }))}
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="draft">Draft</SelectItem>
-                        <SelectItem value="published">Published</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="image">Thumbnail Image *</Label>
+                      <div className="flex items-center gap-4">
+                        <Input
+                          id="image"
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          className="hidden"
+                        />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => document.getElementById('image')?.click()}
+                          className="flex items-center gap-2"
+                        >
+                          <Upload size={16} />
+                          Upload Image
+                        </Button>
+                        {newBlog.image && (
+                          <img 
+                            src={newBlog.image} 
+                            alt="Preview" 
+                            className="w-32 h-24 object-cover rounded border"
+                          />
+                        )}
+                      </div>
+                    </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="image">Thumbnail Image</Label>
-                  <div className="flex items-center gap-4">
-                    <Input
-                      id="image"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="hidden"
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => document.getElementById('image')?.click()}
-                      className="flex items-center gap-2"
-                    >
-                      <Upload size={16} />
-                      Upload Image
-                    </Button>
-                    {newBlog.image && (
-                      <img 
-                        src={newBlog.image} 
-                        alt="Preview" 
-                        className="w-16 h-16 object-cover rounded"
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="author">Author</Label>
+                        <Input
+                          id="author"
+                          placeholder="Author name"
+                          value={newBlog.author}
+                          onChange={(e) => setNewBlog(prev => ({ ...prev, author: e.target.value }))}
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="status">Status</Label>
+                        <Select
+                          value={newBlog.status}
+                          onValueChange={(value: 'draft' | 'published') => setNewBlog(prev => ({ ...prev, status: value }))}
+                        >
+                          <SelectTrigger>
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="draft">Draft</SelectItem>
+                            <SelectItem value="published">Published</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-end">
+                      <Button onClick={handleNextStep} className="flex items-center gap-2">
+                        Next: Add Content
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                {currentStep === 'content' && (
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-semibold text-gray-900">Step 2: Add Content</h3>
+                      <Button variant="outline" onClick={handlePreviousStep} className="flex items-center gap-2">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Back to Thumbnail
+                      </Button>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="content">Content *</Label>
+                      <Textarea
+                        id="content"
+                        placeholder="Write your blog content here..."
+                        value={newBlog.content}
+                        onChange={(e) => setNewBlog(prev => ({ ...prev, content: e.target.value }))}
+                        rows={10}
                       />
-                    )}
-                  </div>
-                </div>
+                    </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="content">Content *</Label>
-                  <Textarea
-                    id="content"
-                    placeholder="Write your blog content here..."
-                    value={newBlog.content}
-                    onChange={(e) => setNewBlog(prev => ({ ...prev, content: e.target.value }))}
-                    rows={10}
-                  />
-                </div>
+                    <div className="space-y-4">
+                      <Label className="text-base font-semibold">Social Media Links</Label>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="blog-instagram" className="flex items-center gap-2">
+                          <Instagram size={16} className="text-pink-600" />
+                          Instagram
+                        </Label>
+                        <Input
+                          id="blog-instagram"
+                          placeholder="https://instagram.com/your-handle"
+                          value={newBlog.socialMedia?.instagram || ""}
+                          onChange={(e) => setNewBlog(prev => ({ 
+                            ...prev, 
+                            socialMedia: { ...prev.socialMedia!, instagram: e.target.value }
+                          }))}
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="blog-twitter" className="flex items-center gap-2">
+                          <Twitter size={16} className="text-blue-400" />
+                          Twitter
+                        </Label>
+                        <Input
+                          id="blog-twitter"
+                          placeholder="https://twitter.com/your-handle"
+                          value={newBlog.socialMedia?.twitter || ""}
+                          onChange={(e) => setNewBlog(prev => ({ 
+                            ...prev, 
+                            socialMedia: { ...prev.socialMedia!, twitter: e.target.value }
+                          }))}
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="blog-linkedin" className="flex items-center gap-2">
+                          <Linkedin size={16} className="text-blue-600" />
+                          LinkedIn
+                        </Label>
+                        <Input
+                          id="blog-linkedin"
+                          placeholder="https://linkedin.com/company/your-company"
+                          value={newBlog.socialMedia?.linkedin || ""}
+                          onChange={(e) => setNewBlog(prev => ({ 
+                            ...prev, 
+                            socialMedia: { ...prev.socialMedia!, linkedin: e.target.value }
+                          }))}
+                        />
+                      </div>
+                    </div>
 
-                <div className="space-y-4">
-                  <Label className="text-base font-semibold">Social Media Links</Label>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="blog-instagram" className="flex items-center gap-2">
-                      <Instagram size={16} className="text-pink-600" />
-                      Instagram
-                    </Label>
-                    <Input
-                      id="blog-instagram"
-                      placeholder="https://instagram.com/your-handle"
-                      value={newBlog.socialMedia?.instagram || ""}
-                      onChange={(e) => setNewBlog(prev => ({ 
-                        ...prev, 
-                        socialMedia: { ...prev.socialMedia!, instagram: e.target.value }
-                      }))}
-                    />
+                    <Button onClick={handleCreateBlog} className="w-full">
+                      Create Blog Post
+                    </Button>
                   </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="blog-twitter" className="flex items-center gap-2">
-                      <Twitter size={16} className="text-blue-400" />
-                      Twitter
-                    </Label>
-                    <Input
-                      id="blog-twitter"
-                      placeholder="https://twitter.com/your-handle"
-                      value={newBlog.socialMedia?.twitter || ""}
-                      onChange={(e) => setNewBlog(prev => ({ 
-                        ...prev, 
-                        socialMedia: { ...prev.socialMedia!, twitter: e.target.value }
-                      }))}
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="blog-linkedin" className="flex items-center gap-2">
-                      <Linkedin size={16} className="text-blue-600" />
-                      LinkedIn
-                    </Label>
-                    <Input
-                      id="blog-linkedin"
-                      placeholder="https://linkedin.com/company/your-company"
-                      value={newBlog.socialMedia?.linkedin || ""}
-                      onChange={(e) => setNewBlog(prev => ({ 
-                        ...prev, 
-                        socialMedia: { ...prev.socialMedia!, linkedin: e.target.value }
-                      }))}
-                    />
-                  </div>
-                </div>
-
-                <Button onClick={handleCreateBlog} className="w-full">
-                  Create Blog Post
-                </Button>
+                )}
               </TabsContent>
               
               <TabsContent value="preview">
@@ -321,113 +367,54 @@ const BlogManagement = () => {
         </Dialog>
       </div>
 
-      <Tabs defaultValue="blogs" className="w-full">
-        <TabsList>
-          <TabsTrigger value="blogs">Blog Posts</TabsTrigger>
-          <TabsTrigger value="social">Social Media Settings</TabsTrigger>
-        </TabsList>
-        
-        <TabsContent value="blogs" className="space-y-4">
-          <div className="grid gap-4">
-            {blogs.map((blog) => (
-              <Card key={blog.id}>
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div className="flex gap-4">
-                      <img 
-                        src={blog.image} 
-                        alt={blog.title}
-                        className="w-24 h-24 object-cover rounded"
-                      />
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{blog.title}</h3>
-                        <p className="text-gray-600 text-sm mb-2 line-clamp-2">{blog.content}</p>
-                        <div className="flex items-center gap-4 text-sm text-gray-500">
-                          <span>By {blog.author}</span>
-                          <span>{blog.date}</span>
-                          <Badge variant={blog.status === 'published' ? 'default' : 'secondary'}>
-                            {blog.status}
-                          </Badge>
-                          <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
-                            {blog.category}
-                          </span>
-                        </div>
+      <div className="space-y-4">
+        <div className="grid gap-4">
+          {blogs.map((blog) => (
+            <Card key={blog.id}>
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between">
+                  <div className="flex gap-4">
+                    <img 
+                      src={blog.image} 
+                      alt={blog.title}
+                      className="w-24 h-24 object-cover rounded"
+                    />
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{blog.title}</h3>
+                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">{blog.content}</p>
+                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                        <span>By {blog.author}</span>
+                        <span>{blog.date}</span>
+                        <Badge variant={blog.status === 'published' ? 'default' : 'secondary'}>
+                          {blog.status}
+                        </Badge>
+                        <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
+                          {blog.category}
+                        </span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm">
-                        <Eye size={16} />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Edit size={16} />
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        onClick={() => handleDeleteBlog(blog.id)}
-                      >
-                        <Trash2 size={16} />
-                      </Button>
-                    </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </TabsContent>
-        
-        <TabsContent value="social" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Social Media Links</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="instagram" className="flex items-center gap-2">
-                  <Instagram size={16} className="text-pink-600" />
-                  Instagram
-                </Label>
-                <Input
-                  id="instagram"
-                  placeholder="https://instagram.com/your-handle"
-                  value={socialMediaLinks.instagram}
-                  onChange={(e) => setSocialMediaLinks(prev => ({ ...prev, instagram: e.target.value }))}
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="twitter" className="flex items-center gap-2">
-                  <Twitter size={16} className="text-blue-400" />
-                  Twitter
-                </Label>
-                <Input
-                  id="twitter"
-                  placeholder="https://twitter.com/your-handle"
-                  value={socialMediaLinks.twitter}
-                  onChange={(e) => setSocialMediaLinks(prev => ({ ...prev, twitter: e.target.value }))}
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="linkedin" className="flex items-center gap-2">
-                  <Linkedin size={16} className="text-blue-600" />
-                  LinkedIn
-                </Label>
-                <Input
-                  id="linkedin"
-                  placeholder="https://linkedin.com/company/your-company"
-                  value={socialMediaLinks.linkedin}
-                  onChange={(e) => setSocialMediaLinks(prev => ({ ...prev, linkedin: e.target.value }))}
-                />
-              </div>
-              
-              <Button onClick={handleUpdateSocialMedia} className="w-full">
-                Update Social Media Links
-              </Button>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm">
+                      <Eye size={16} />
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Edit size={16} />
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => handleDeleteBlog(blog.id)}
+                    >
+                      <Trash2 size={16} />
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

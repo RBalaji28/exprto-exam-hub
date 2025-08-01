@@ -2,8 +2,12 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SessionCard from "@/components/SessionCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useState } from "react";
 
 const BookingSessions = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
   // Group sessions
   const groupSessions = [
     {
@@ -18,7 +22,8 @@ const BookingSessions = () => {
       rating: 4.9,
       subjects: ["Physics", "Mathematics"],
       price: 500,
-      type: "group"
+      type: "group",
+      category: "JEE"
     },
     {
       id: "2",
@@ -32,7 +37,8 @@ const BookingSessions = () => {
       rating: 4.8,
       subjects: ["Biology", "Chemistry"],
       price: 750,
-      type: "group"
+      type: "group",
+      category: "NEET"
     },
     {
       id: "3",
@@ -46,7 +52,8 @@ const BookingSessions = () => {
       rating: 4.7,
       subjects: ["History", "Geography"],
       price: 600,
-      type: "group"
+      type: "group",
+      category: "UPSC"
     },
     {
       id: "4",
@@ -60,7 +67,8 @@ const BookingSessions = () => {
       rating: 4.9,
       subjects: ["Physics"],
       price: 450,
-      type: "group"
+      type: "group",
+      category: "JEE"
     },
     {
       id: "5",
@@ -74,7 +82,8 @@ const BookingSessions = () => {
       rating: 4.6,
       subjects: ["Mathematics"],
       price: 550,
-      type: "group"
+      type: "group",
+      category: "JEE"
     },
     {
       id: "6",
@@ -88,7 +97,8 @@ const BookingSessions = () => {
       rating: 4.8,
       subjects: ["Chemistry"],
       price: 650,
-      type: "group"
+      type: "group",
+      category: "NEET"
     },
     {
       id: "7",
@@ -102,7 +112,8 @@ const BookingSessions = () => {
       rating: 4.5,
       subjects: ["English"],
       price: 400,
-      type: "group"
+      type: "group",
+      category: "General"
     },
     {
       id: "8",
@@ -116,7 +127,8 @@ const BookingSessions = () => {
       rating: 4.9,
       subjects: ["Computer Science"],
       price: 800,
-      type: "group"
+      type: "group",
+      category: "General"
     },
     {
       id: "9",
@@ -130,7 +142,8 @@ const BookingSessions = () => {
       rating: 4.7,
       subjects: ["Economics"],
       price: 600,
-      type: "group"
+      type: "group",
+      category: "General"
     },
     {
       id: "10",
@@ -144,7 +157,8 @@ const BookingSessions = () => {
       rating: 4.8,
       subjects: ["Biology"],
       price: 500,
-      type: "group"
+      type: "group",
+      category: "NEET"
     },
     {
       id: "11",
@@ -158,7 +172,8 @@ const BookingSessions = () => {
       rating: 4.6,
       subjects: ["History"],
       price: 550,
-      type: "group"
+      type: "group",
+      category: "UPSC"
     },
     {
       id: "12",
@@ -172,7 +187,8 @@ const BookingSessions = () => {
       rating: 4.7,
       subjects: ["Geography"],
       price: 600,
-      type: "group"
+      type: "group",
+      category: "UPSC"
     }
   ];
 
@@ -190,7 +206,8 @@ const BookingSessions = () => {
       rating: 4.9,
       subjects: ["Physics", "Mathematics"],
       price: 2000,
-      type: "onetoone"
+      type: "onetoone",
+      category: "JEE"
     },
     {
       id: "o2",
@@ -204,7 +221,8 @@ const BookingSessions = () => {
       rating: 4.8,
       subjects: ["Biology"],
       price: 2500,
-      type: "onetoone"
+      type: "onetoone",
+      category: "NEET"
     },
     {
       id: "o3",
@@ -218,7 +236,8 @@ const BookingSessions = () => {
       rating: 4.7,
       subjects: ["History", "Geography"],
       price: 3000,
-      type: "onetoone"
+      type: "onetoone",
+      category: "UPSC"
     },
     {
       id: "o4",
@@ -232,7 +251,8 @@ const BookingSessions = () => {
       rating: 4.9,
       subjects: ["Physics"],
       price: 1800,
-      type: "onetoone"
+      type: "onetoone",
+      category: "JEE"
     },
     {
       id: "o5",
@@ -246,7 +266,8 @@ const BookingSessions = () => {
       rating: 4.6,
       subjects: ["Mathematics"],
       price: 2200,
-      type: "onetoone"
+      type: "onetoone",
+      category: "JEE"
     },
     {
       id: "o6",
@@ -260,9 +281,20 @@ const BookingSessions = () => {
       rating: 4.8,
       subjects: ["Chemistry"],
       price: 2000,
-      type: "onetoone"
+      type: "onetoone",
+      category: "NEET"
     }
   ];
+
+  const categories = ["All", "JEE", "NEET", "UPSC", "General"];
+
+  const filterSessionsByCategory = (sessions: any[]) => {
+    if (selectedCategory === "All") return sessions;
+    return sessions.filter(session => session.category === selectedCategory);
+  };
+
+  const filteredGroupSessions = filterSessionsByCategory(groupSessions);
+  const filteredOneToOneSessions = filterSessionsByCategory(oneToOneSessions);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -272,6 +304,20 @@ const BookingSessions = () => {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Book Your Sessions</h1>
           <p className="text-gray-600">Choose from our available mentorship sessions and book your slot.</p>
+          
+          <div className="mt-6 max-w-xs">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Category</label>
+            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((category) => (
+                  <SelectItem key={category} value={category}>{category}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         <Tabs defaultValue="group" className="w-full">
@@ -281,8 +327,14 @@ const BookingSessions = () => {
           </TabsList>
           
           <TabsContent value="group">
+            <div className="mb-4">
+              <p className="text-sm text-gray-600">
+                Showing {filteredGroupSessions.length} of {groupSessions.length} group sessions
+                {selectedCategory !== "All" && ` for ${selectedCategory}`}
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {groupSessions.map((session) => (
+              {filteredGroupSessions.map((session) => (
                 <SessionCard
                   key={session.id}
                   {...session}
@@ -293,8 +345,14 @@ const BookingSessions = () => {
           </TabsContent>
           
           <TabsContent value="onetoone">
+            <div className="mb-4">
+              <p className="text-sm text-gray-600">
+                Showing {filteredOneToOneSessions.length} of {oneToOneSessions.length} one-to-one sessions
+                {selectedCategory !== "All" && ` for ${selectedCategory}`}
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {oneToOneSessions.map((session) => (
+              {filteredOneToOneSessions.map((session) => (
                 <SessionCard
                   key={session.id}
                   {...session}
