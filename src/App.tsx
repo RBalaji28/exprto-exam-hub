@@ -23,6 +23,7 @@ import FAQ from "./pages/FAQ";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PostSession from "./pages/PostSession";
+import BlogPost from "./pages/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -58,6 +59,7 @@ const App = () => (
                 <PostSession />
               </ProtectedRoute>
             } />
+            <Route path="/blog/:id" element={<BlogPost />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -182,12 +183,14 @@ const Blogs = () => {
                           <span>{article.author}</span>
                         </div>
                       </div>
-                      <Button 
-                        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-medium inline-flex items-center space-x-2"
-                      >
-                        <span>Read More</span>
-                        <ArrowRight size={16} />
-                      </Button>
+                      <Link to={`/blog/${index + 1}`}>
+                        <Button 
+                          className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-medium inline-flex items-center space-x-2"
+                        >
+                          <span>Read More</span>
+                          <ArrowRight size={16} />
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </CarouselItem>
@@ -247,12 +250,14 @@ const Blogs = () => {
                   </p>
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-gray-500">{article.date}</span>
-                    <Button 
-                      size="sm"
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-medium"
-                    >
-                      Read More
-                    </Button>
+                    <Link to={`/blog/${index + 1}`}>
+                      <Button 
+                        size="sm"
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-medium"
+                      >
+                        Read More
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>

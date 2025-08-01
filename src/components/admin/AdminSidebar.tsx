@@ -8,6 +8,7 @@ import {
   CreditCard, 
   FileText, 
   Share2,
+  BookOpen,
   X 
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -29,6 +30,7 @@ const AdminSidebar = ({ isOpen, onClose }: AdminSidebarProps) => {
     { icon: Calendar, label: "Session Details", href: "/admin-dashboard?tab=sessions" },
     { icon: CreditCard, label: "Payment Details", href: "/admin-dashboard?tab=payments" },
     { icon: FileText, label: "Content Management", href: "/admin-dashboard?tab=content" },
+    { icon: BookOpen, label: "Blog Management", href: "/admin-dashboard?tab=blogs" },
     { icon: Share2, label: "Social Media", href: "/admin-dashboard?tab=social" },
   ];
 

@@ -6,6 +6,7 @@ import SessionManagement from "@/components/admin/SessionManagement";
 import PaymentManagement from "@/components/admin/PaymentManagement";
 import SocialMediaSettings from "@/components/admin/SocialMediaSettings";
 import ContentManagement from "@/components/admin/ContentManagement";
+import BlogManagement from "@/components/admin/BlogManagement";
 import { dashboardStats, mentors, students, sessionData, payments } from "@/data/adminMockData";
 
 interface AdminDashboardContentProps {
@@ -85,6 +86,16 @@ const AdminDashboardContent = ({
             <p className="text-gray-600">Manage website content and pages.</p>
           </div>
           <ContentManagement />
+        </>
+      )}
+
+      {activeTab === 'blogs' && (
+        <>
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Blog Management</h2>
+            <p className="text-gray-600">Create and manage blog posts with preview functionality.</p>
+          </div>
+          <BlogManagement />
         </>
       )}
 
