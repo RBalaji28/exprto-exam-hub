@@ -20,6 +20,11 @@ interface BlogPost {
   date: string;
   image: string;
   status: 'draft' | 'published';
+  socialMedia: {
+    instagram: string;
+    twitter: string;
+    linkedin: string;
+  };
 }
 
 interface SocialMediaLinks {
@@ -38,7 +43,12 @@ const BlogManagement = () => {
       author: "Admin",
       date: "2024-01-15",
       image: "/placeholder.svg?height=400&width=600",
-      status: 'published'
+      status: 'published',
+      socialMedia: {
+        instagram: "https://instagram.com/rugbyworld",
+        twitter: "https://twitter.com/rugbyworld",
+        linkedin: "https://linkedin.com/company/rugbyworld"
+      }
     },
     {
       id: "2",
@@ -48,7 +58,12 @@ const BlogManagement = () => {
       author: "Dr. Sharma",
       date: "2024-01-10",
       image: "/placeholder.svg?height=400&width=600",
-      status: 'published'
+      status: 'published',
+      socialMedia: {
+        instagram: "https://instagram.com/jeestudytips",
+        twitter: "https://twitter.com/jeestudytips",
+        linkedin: "https://linkedin.com/company/jeestudytips"
+      }
     }
   ]);
 
@@ -64,7 +79,12 @@ const BlogManagement = () => {
     category: "",
     author: "Admin",
     image: "",
-    status: 'draft'
+    status: 'draft',
+    socialMedia: {
+      instagram: "",
+      twitter: "",
+      linkedin: ""
+    }
   });
 
   const [previewMode, setPreviewMode] = useState(false);
@@ -99,7 +119,8 @@ const BlogManagement = () => {
       author: newBlog.author!,
       date: new Date().toISOString().split('T')[0],
       image: newBlog.image || "/placeholder.svg?height=400&width=600",
-      status: newBlog.status as 'draft' | 'published'
+      status: newBlog.status as 'draft' | 'published',
+      socialMedia: newBlog.socialMedia!
     };
 
     setBlogs(prev => [...prev, blog]);
@@ -109,7 +130,12 @@ const BlogManagement = () => {
       category: "",
       author: "Admin",
       image: "",
-      status: 'draft'
+      status: 'draft',
+      socialMedia: {
+        instagram: "",
+        twitter: "",
+        linkedin: ""
+      }
     });
     toast.success("Blog post created successfully!");
   };
@@ -274,6 +300,58 @@ const BlogManagement = () => {
                     onChange={(e) => setNewBlog(prev => ({ ...prev, content: e.target.value }))}
                     rows={10}
                   />
+                </div>
+
+                <div className="space-y-4">
+                  <Label className="text-base font-semibold">Social Media Links</Label>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="blog-instagram" className="flex items-center gap-2">
+                      <Instagram size={16} className="text-pink-600" />
+                      Instagram
+                    </Label>
+                    <Input
+                      id="blog-instagram"
+                      placeholder="https://instagram.com/your-handle"
+                      value={newBlog.socialMedia?.instagram || ""}
+                      onChange={(e) => setNewBlog(prev => ({ 
+                        ...prev, 
+                        socialMedia: { ...prev.socialMedia!, instagram: e.target.value }
+                      }))}
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="blog-twitter" className="flex items-center gap-2">
+                      <Twitter size={16} className="text-blue-400" />
+                      Twitter
+                    </Label>
+                    <Input
+                      id="blog-twitter"
+                      placeholder="https://twitter.com/your-handle"
+                      value={newBlog.socialMedia?.twitter || ""}
+                      onChange={(e) => setNewBlog(prev => ({ 
+                        ...prev, 
+                        socialMedia: { ...prev.socialMedia!, twitter: e.target.value }
+                      }))}
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="blog-linkedin" className="flex items-center gap-2">
+                      <Linkedin size={16} className="text-blue-600" />
+                      LinkedIn
+                    </Label>
+                    <Input
+                      id="blog-linkedin"
+                      placeholder="https://linkedin.com/company/your-company"
+                      value={newBlog.socialMedia?.linkedin || ""}
+                      onChange={(e) => setNewBlog(prev => ({ 
+                        ...prev, 
+                        socialMedia: { ...prev.socialMedia!, linkedin: e.target.value }
+                      }))}
+                    />
+                  </div>
                 </div>
 
                 <Button onClick={handleCreateBlog} className="w-full">
