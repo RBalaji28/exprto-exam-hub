@@ -4,61 +4,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Calendar, User, Share2 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-
-// Mock blog data - in real app, this would come from your backend
-const blogPosts = [
-  {
-    id: "1",
-    title: "Rugby World Cup 2023 Semi-Finals",
-    content: `
-      <p>Create a blog post subtitle that summarizes your post in a few short, punchy sentences and entices your audience to continue reading.</p>
-      
-      <p>Welcome to your blog post. Use this space to connect with your readers and potential customers in a way that's current and interesting. Think of it as an ongoing conversation where you can share updates about business, trends, news, and more.</p>
-      
-      <p>"Do you have a design in mind for your blog? Whether you prefer a trendy postcard look or you're going for a more editorial style blog - there's a stunning layout for everyone."</p>
-      
-      <p>You'll be posting loads of engaging content, so be sure to keep your blog organized with Categories that also allow visitors to explore more of what interests them.</p>
-      
-      <p>Create Relevant Content</p>
-      <p>Writing a blog is a great way to position yourself as an authority in your field and captivate your readers' attention. Do you want to improve your site's SEO ranking? Consider topics that focus on relevant keywords and relate back to your website or business. You can also add hashtag (#vacation #dream #summer) throughout your posts to reach more people, and help visitors search for relevant content.</p>
-      
-      <p>Blogging gives your site a voice, so let your business' personality shine through. Choose a great image to feature in your post or add a video for extra engagement. Are you ready to get started? Simply create a new post now.</p>
-    `,
-    image: "/placeholder.svg?height=400&width=800",
-    author: "Admin",
-    date: "2024-01-15",
-    category: "Sports",
-    socialMedia: {
-      instagram: "https://instagram.com/rugbyworld",
-      twitter: "https://twitter.com/rugbyworld",
-      linkedin: "https://linkedin.com/company/rugbyworld"
-    }
-  },
-  {
-    id: "2",
-    title: "Study Tips for JEE Preparation",
-    content: `
-      <p>Preparing for JEE requires dedication, strategy, and consistent effort. Here are some proven tips to help you succeed.</p>
-      
-      <p>Start with a strong foundation in basic concepts before moving to advanced topics. Regular practice and mock tests are essential for success.</p>
-      
-      <p>Time management during the exam is crucial. Practice solving questions within time limits to improve your speed and accuracy.</p>
-    `,
-    image: "/placeholder.svg?height=400&width=800",
-    author: "Dr. Sharma",
-    date: "2024-01-10",
-    category: "Education",
-    socialMedia: {
-      instagram: "https://instagram.com/jeestudytips",
-      twitter: "https://twitter.com/jeestudytips",
-      linkedin: "https://linkedin.com/company/jeestudytips"
-    }
-  }
-];
+import { useBlog } from "@/contexts/BlogContext";
 
 const BlogPost = () => {
   const { id } = useParams();
-  const post = blogPosts.find(p => p.id === id);
+  const { blogs } = useBlog();
+  const post = blogs.find(p => p.id === id);
 
   if (!post) {
     return (
@@ -124,10 +75,11 @@ const BlogPost = () => {
               </div>
 
               {/* Article Content */}
-              <div 
-                className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
+              <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+                {post.content.split('\n').map((paragraph, index) => (
+                  paragraph.trim() && <p key={index} className="mb-4">{paragraph}</p>
+                ))}
+              </div>
 
               {/* Social Media Links */}
               <div className="mt-8 pt-8 border-t border-gray-200">

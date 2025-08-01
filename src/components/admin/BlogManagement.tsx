@@ -10,22 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Eye, Plus, Edit, Trash2, Upload, Instagram, Twitter, Linkedin } from "lucide-react";
 import { toast } from "sonner";
-
-interface BlogPost {
-  id: string;
-  title: string;
-  content: string;
-  category: string;
-  author: string;
-  date: string;
-  image: string;
-  status: 'draft' | 'published';
-  socialMedia: {
-    instagram: string;
-    twitter: string;
-    linkedin: string;
-  };
-}
+import { useBlog, BlogPost } from "@/contexts/BlogContext";
 
 interface SocialMediaLinks {
   instagram: string;
@@ -34,38 +19,7 @@ interface SocialMediaLinks {
 }
 
 const BlogManagement = () => {
-  const [blogs, setBlogs] = useState<BlogPost[]>([
-    {
-      id: "1",
-      title: "Rugby World Cup 2023 Semi-Finals",
-      content: "Create a blog post subtitle that summarizes your post...",
-      category: "Sports",
-      author: "Admin",
-      date: "2024-01-15",
-      image: "/placeholder.svg?height=400&width=600",
-      status: 'published',
-      socialMedia: {
-        instagram: "https://instagram.com/rugbyworld",
-        twitter: "https://twitter.com/rugbyworld",
-        linkedin: "https://linkedin.com/company/rugbyworld"
-      }
-    },
-    {
-      id: "2",
-      title: "Study Tips for JEE Preparation",
-      content: "Preparing for JEE requires dedication, strategy...",
-      category: "Education",
-      author: "Dr. Sharma",
-      date: "2024-01-10",
-      image: "/placeholder.svg?height=400&width=600",
-      status: 'published',
-      socialMedia: {
-        instagram: "https://instagram.com/jeestudytips",
-        twitter: "https://twitter.com/jeestudytips",
-        linkedin: "https://linkedin.com/company/jeestudytips"
-      }
-    }
-  ]);
+  const { blogs, addBlog, deleteBlog } = useBlog();
 
   const [socialMediaLinks, setSocialMediaLinks] = useState<SocialMediaLinks>({
     instagram: "https://instagram.com/mentxtv",
@@ -123,7 +77,7 @@ const BlogManagement = () => {
       socialMedia: newBlog.socialMedia!
     };
 
-    setBlogs(prev => [...prev, blog]);
+    addBlog(blog);
     setNewBlog({
       title: "",
       content: "",
@@ -141,7 +95,7 @@ const BlogManagement = () => {
   };
 
   const handleDeleteBlog = (id: string) => {
-    setBlogs(prev => prev.filter(blog => blog.id !== id));
+    deleteBlog(id);
     toast.success("Blog post deleted successfully!");
   };
 
