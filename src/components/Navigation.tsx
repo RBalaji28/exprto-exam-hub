@@ -28,6 +28,7 @@ const Navigation = () => {
   const sideMenuItems = [
     { icon: User, label: "Login/Signup", href: "/login" },
     { icon: FileText, label: "Blogs", href: "/blogs" },
+    { icon: Users, label: "Mentors", href: "/mentors" },
     { icon: Users, label: "Become a mentor", href: "/become-mentor" },
     { icon: Users, label: "About Us", href: "/about" },
     { icon: HelpCircle, label: "FAQ's", href: "/faq" },
@@ -38,6 +39,7 @@ const Navigation = () => {
   const loggedInSideMenuItems = [
     { icon: User, label: "Dashboard", href: getDashboardLink() },
     { icon: FileText, label: "Blogs", href: "/blogs" },
+    { icon: Users, label: "Mentors", href: "/mentors" },
     { icon: Users, label: "Become a mentor", href: "/become-mentor" },
     { icon: Users, label: "About Us", href: "/about" },
     { icon: HelpCircle, label: "FAQ's", href: "/faq" },
@@ -77,6 +79,9 @@ const Navigation = () => {
               <div className="ml-10 flex items-baseline space-x-8">
                 <a href="/" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
                   Home
+                </a>
+                <a href="/mentors" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+                  Mentors
                 </a>
                 <a href="/become-mentor" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
                   Become a Mentor
@@ -149,6 +154,9 @@ const Navigation = () => {
               <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
                 <a href="/" className="text-gray-900 block px-3 py-2 text-base font-medium">
                   Home
+                </a>
+                <a href="/mentors" className="text-gray-700 block px-3 py-2 text-base font-medium">
+                  Mentors
                 </a>
                 <a href="/become-mentor" className="text-gray-700 block px-3 py-2 text-base font-medium">
                   Become a Mentor

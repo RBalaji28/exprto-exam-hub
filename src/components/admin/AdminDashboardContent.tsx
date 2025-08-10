@@ -7,7 +7,7 @@ import PaymentManagement from "@/components/admin/PaymentManagement";
 import SocialMediaSettings from "@/components/admin/SocialMediaSettings";
 import ContentManagement from "@/components/admin/ContentManagement";
 import BlogManagement from "@/components/admin/BlogManagement";
-import { dashboardStats, mentors, students, sessionData, payments } from "@/data/adminMockData";
+import { dashboardStats, students, sessionData, payments } from "@/data/adminMockData";
 
 interface AdminDashboardContentProps {
   socialLinks: {
@@ -51,7 +51,7 @@ const AdminDashboardContent = ({
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Mentor Details</h2>
             <p className="text-gray-600">Manage and monitor mentor performance.</p>
           </div>
-          <MentorManagement mentors={mentors} />
+          <MentorManagement />
         </>
       )}
 

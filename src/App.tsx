@@ -26,6 +26,8 @@ import PostSession from "./pages/PostSession";
 import BlogPost from "./pages/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
+import Mentors from "./pages/Mentors";
+import SubscribePlans from "./pages/SubscribePlans";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +62,12 @@ const App = () => (
               </ProtectedRoute>
             } />
             <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/mentors" element={<Mentors />} />
+            <Route path="/mentors/:mentorId/subscribe" element={
+              <ProtectedRoute allowedRoles={["Student","Mentor","Admin"]}>
+                <SubscribePlans />
+              </ProtectedRoute>
+            } />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
