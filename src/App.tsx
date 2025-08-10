@@ -63,11 +63,7 @@ const App = () => (
             } />
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/mentors" element={<Mentors />} />
-            <Route path="/mentors/:mentorId/subscribe" element={
-              <ProtectedRoute allowedRoles={["Student","Mentor","Admin"]}>
-                <SubscribePlans />
-              </ProtectedRoute>
-            } />
+            <Route path="/mentors/:mentorId/subscribe" element={<SubscribePlans />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

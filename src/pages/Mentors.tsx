@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMentors } from "@/contexts/MentorContext";
-import { useUser } from "@/contexts/UserContext";
-import { useToast } from "@/hooks/use-toast";
+
+
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,8 +17,8 @@ const renderStars = (rating: number) =>
 
 const Mentors = () => {
   const { mentors, domains } = useMentors();
-  const { user } = useUser();
-  const { toast } = useToast();
+  
+  
   const navigate = useNavigate();
   const [category, setCategory] = useState<string>("all");
 
@@ -32,11 +32,6 @@ const Mentors = () => {
   }, [mentors, category]);
 
   const handleSubscribe = (mentorId: string) => {
-    if (!user) {
-      toast({ title: "Login required", description: "Please login or signup to subscribe." });
-      navigate("/login");
-      return;
-    }
     navigate(`/mentors/${mentorId}/subscribe`);
   };
 
