@@ -31,7 +31,7 @@ const AdminSidebar = ({ isOpen, onClose }: AdminSidebarProps) => {
     { icon: CreditCard, label: "Payment Details", href: "/admin-dashboard?tab=payments" },
     { icon: FileText, label: "Content Management", href: "/admin-dashboard?tab=content" },
     { icon: BookOpen, label: "Blog Management", href: "/admin-dashboard?tab=blogs" },
-    { icon: Share2, label: "Social Media", href: "/admin-dashboard?tab=social" },
+    { icon: FileText, label: "Test Management", href: "/admin-dashboard?tab=tests" },
   ];
 
   const isActive = (path: string) => {

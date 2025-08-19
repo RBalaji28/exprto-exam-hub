@@ -109,17 +109,13 @@ const AdminDashboardContent = ({
         </>
       )}
 
-      {activeTab === 'social' && (
+      {activeTab === 'tests' && (
         <>
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Social Media</h2>
-            <p className="text-gray-600">Manage social media links and settings.</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Test Management</h2>
+            <p className="text-gray-600">Create and manage test questions and portal content.</p>
           </div>
-          <SocialMediaSettings 
-            links={socialLinks}
-            onInputChange={onSocialLinksChange}
-            onSave={onSocialLinksSave}
-          />
+          <TestManagement />
         </>
       )}
     </main>

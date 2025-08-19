@@ -4,6 +4,7 @@ import StudentHeader from "@/components/student/StudentHeader";
 import StudentStats from "@/components/student/StudentStats";
 import StudentSessions from "@/components/student/StudentSessions";
 import StudentQuickActions from "@/components/student/StudentQuickActions";
+import StudentSubscriptions from "@/components/student/StudentSubscriptions";
 
 const StudentDashboard = () => {
   const { user } = useUser();
@@ -23,6 +24,11 @@ const StudentDashboard = () => {
 
         {/* Stats Cards */}
         <StudentStats />
+
+        {/* Subscriptions */}
+        <div className="mb-8">
+          <StudentSubscriptions />
+        </div>
 
         {/* Sessions */}
         <StudentSessions />

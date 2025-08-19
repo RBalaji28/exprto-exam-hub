@@ -23,52 +23,116 @@ const SubscribePlans = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-3xl font-bold text-gray-900">Subscribe to {mentor.name}</h1>
-          <p className="text-gray-600">Choose a plan that fits your goals.</p>
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+      <header className="bg-card border-b shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-foreground mb-2">Subscribe to {mentor.name}</h1>
+            <p className="text-muted-foreground text-lg">Choose a plan that fits your goals and unlock your potential</p>
+          </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Standard / Plus Plan */}
-          <Card className="border-2">
-            <CardHeader>
-              <CardTitle className="text-xl">Standard / Plus Plan – "Learn & Grow"</CardTitle>
-              <p className="text-gray-700">₹500 per month</p>
+          <Card className="relative overflow-hidden border-2 hover:shadow-lg transition-all duration-300 bg-card">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary/60"></div>
+            <CardHeader className="pb-4">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-2xl font-bold text-foreground">Standard Plan</CardTitle>
+                <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">Popular</span>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">"Learn & Grow"</p>
+              <div className="flex items-baseline gap-1">
+                <span className="text-3xl font-bold text-foreground">₹500</span>
+                <span className="text-muted-foreground">per month</span>
+              </div>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm text-gray-800">
-              <ul className="list-disc pl-5 space-y-2">
-                <li>Join mentor's WhatsApp community</li>
-                <li>Monthly live group classes with mentors</li>
-                <li>Personalized study plan generator</li>
-                <li>Doubt-solving sessions within 24 hours</li>
-                <li>Full access to all study materials</li>
-                <li>Unlimited mentor Q&A sessions via chat</li>
-                <li>1-on-1 mentor sessions (video calls) – 1 time per month</li>
+            <CardContent className="space-y-6">
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Join mentor's WhatsApp community</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Monthly live group classes with mentors</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Personalized study plan generator</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Doubt-solving sessions within 24 hours</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Full access to all study materials</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Unlimited mentor Q&A sessions via chat</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">1-on-1 mentor sessions (video calls) – 1 time per month</span>
+                </li>
               </ul>
-              <Button className="w-full mt-4">Choose Standard</Button>
+              <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 text-base">
+                Choose Standard Plan
+              </Button>
             </CardContent>
           </Card>
 
           {/* Pro / Premium Plan */}
-          <Card className="border-2">
-            <CardHeader>
-              <CardTitle className="text-xl">Pro / Premium Plan – "Master Your Exams"</CardTitle>
-              <p className="text-gray-700">Price: e.g., ₹10000–₹20000 / month</p>
+          <Card className="relative overflow-hidden border-2 hover:shadow-lg transition-all duration-300 bg-card border-primary/20">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-primary to-primary/80"></div>
+            <CardHeader className="pb-4">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-2xl font-bold text-foreground">Premium Plan</CardTitle>
+                <span className="text-sm font-medium text-orange-600 bg-orange-100 px-3 py-1 rounded-full">Best Value</span>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">"Master Your Exams"</p>
+              <div className="flex items-baseline gap-1">
+                <span className="text-3xl font-bold text-foreground">₹15,000</span>
+                <span className="text-muted-foreground">per month</span>
+              </div>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm text-gray-800">
-              <ul className="list-disc pl-5 space-y-2">
-                <li>Unlimited 1-on-1 mentor sessions (video calls)</li>
-                <li>Dedicated personal mentor assigned</li>
-                <li>Real-time doubt-solving (chat/video)</li>
-                <li>Access to exclusive study groups</li>
-                <li>Weekly performance review sessions with mentors</li>
-                <li>Offline support (phone mentoring sessions)</li>
+            <CardContent className="space-y-6">
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Unlimited 1-on-1 mentor sessions (video calls)</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Dedicated personal mentor assigned</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Real-time doubt-solving (chat/video)</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Access to exclusive study groups</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Weekly performance review sessions with mentors</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-sm text-foreground">Offline support (phone mentoring sessions)</span>
+                </li>
               </ul>
-              <Button className="w-full mt-4" variant="outline">Choose Premium</Button>
+              <Button 
+                variant="outline" 
+                className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold py-3 text-base transition-all duration-300"
+              >
+                Choose Premium Plan
+              </Button>
             </CardContent>
           </Card>
         </div>

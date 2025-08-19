@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { LogOut, Calendar, Users, Star, Plus, List, Camera } from "lucide-react";
 import { Link } from "react-router-dom";
+import MentorSubscribers from "@/components/mentor/MentorSubscribers";
 
 const MentorDashboard = () => {
   const [mentorImage, setMentorImage] = useState<string | null>(null);
@@ -137,6 +138,11 @@ const MentorDashboard = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Subscribers Section */}
+        <div className="mb-8">
+          <MentorSubscribers />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
