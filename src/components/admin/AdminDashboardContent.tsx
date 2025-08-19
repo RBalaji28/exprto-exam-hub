@@ -7,6 +7,7 @@ import PaymentManagement from "@/components/admin/PaymentManagement";
 import SocialMediaSettings from "@/components/admin/SocialMediaSettings";
 import ContentManagement from "@/components/admin/ContentManagement";
 import BlogManagement from "@/components/admin/BlogManagement";
+import TestManagement from "@/components/admin/TestManagement";
 import { dashboardStats, students, sessionData, payments } from "@/data/adminMockData";
 
 interface AdminDashboardContentProps {
