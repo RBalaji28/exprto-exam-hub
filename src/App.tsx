@@ -9,6 +9,8 @@ import Index from "./pages/Index";
 import ExamDetails from "./pages/ExamDetails";
 import BecomeMentor from "./pages/BecomeMentor";
 import TestPortal from "./pages/TestPortal";
+import TestExam from "./pages/TestExam";
+import TestResult from "./pages/TestResult";
 import Blogs from "./pages/Blogs";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -43,6 +45,8 @@ const App = () => (
             <Route path="/exam-details" element={<ExamDetails />} />
             <Route path="/become-mentor" element={<BecomeMentor />} />
             <Route path="/test-portal" element={<TestPortal />} />
+            <Route path="/test-exam/:testId" element={<TestExam />} />
+            <Route path="/test-result/:testId" element={<TestResult />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

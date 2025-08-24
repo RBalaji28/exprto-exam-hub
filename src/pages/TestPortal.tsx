@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
@@ -8,6 +9,7 @@ import { BookOpen, Clock, FileText, Award, Target, CheckCircle } from "lucide-re
 
 const TestPortal = () => {
   const [selectedExam, setSelectedExam] = useState("JEE Main");
+  const navigate = useNavigate();
 
   const exams = [
     "JEE Main", "JEE Advanced", "NEET", "BITSAT", "VITEEE", 
@@ -217,8 +219,11 @@ const TestPortal = () => {
                       <h3 className="font-semibold text-gray-900 mb-1">{test.name}</h3>
                       <p className="text-blue-600 font-medium text-sm mb-2">{test.count}</p>
                       <p className="text-gray-600 text-sm">{test.description}</p>
-                      <Button className="w-full mt-3 bg-blue-500 hover:bg-blue-600 text-white">
-                        Explore
+                      <Button 
+                        className="w-full mt-3 bg-blue-500 hover:bg-blue-600 text-white"
+                        onClick={() => navigate('/test-exam/demo-test')}
+                      >
+                        Start Test
                       </Button>
                     </div>
                   ))}

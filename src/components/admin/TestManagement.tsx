@@ -8,7 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Plus, Edit, Trash2, Eye, BookOpen, Clock, Users } from "lucide-react";
+import { Plus, Edit, Trash2, Eye, BookOpen, Clock, Users, FileEdit } from "lucide-react";
+import TestDetailsView from "./TestDetailsView";
+import TestQuestionCreator from "./TestQuestionCreator";
 
 // Mock data - replace with real data from backend
 const mockTests = [
@@ -46,6 +48,8 @@ const TestManagement = () => {
   const [tests, setTests] = useState(mockTests);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [editingTest, setEditingTest] = useState<any>(null);
+  const [currentView, setCurrentView] = useState<'list' | 'details' | 'questions'>('list');
+  const [selectedTestId, setSelectedTestId] = useState<string | null>(null);
   
   // Form state
   const [formData, setFormData] = useState({
@@ -83,6 +87,10 @@ const TestManagement = () => {
     setTests([...tests, newTest]);
     setIsCreateDialogOpen(false);
     resetForm();
+    
+    // Navigate to question creation
+    setSelectedTestId(newTest.id);
+    setCurrentView('questions');
   };
 
   const handleEditTest = (test: any) => {
@@ -122,6 +130,41 @@ const TestManagement = () => {
       default: return "bg-gray-100 text-gray-800";
     }
   };
+
+  const handleViewDetails = (testId: string) => {
+    setSelectedTestId(testId);
+    setCurrentView('details');
+  };
+
+  const handleCreateQuestions = (testId: string) => {
+    setSelectedTestId(testId);
+    setCurrentView('questions');
+  };
+
+  const handleBackToList = () => {
+    setCurrentView('list');
+    setSelectedTestId(null);
+  };
+
+  if (currentView === 'details' && selectedTestId) {
+    return (
+      <TestDetailsView 
+        testId={selectedTestId} 
+        onBack={handleBackToList}
+      />
+    );
+  }
+
+  if (currentView === 'questions' && selectedTestId) {
+    const selectedTest = tests.find(test => test.id === selectedTestId);
+    return (
+      <TestQuestionCreator 
+        testId={selectedTestId}
+        testTitle={selectedTest?.title || "Test"}
+        onBack={handleBackToList}
+      />
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -290,8 +333,11 @@ const TestManagement = () => {
                       <Button variant="outline" size="sm" onClick={() => handleEditTest(test)}>
                         <Edit size={14} />
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" onClick={() => handleViewDetails(test.id)}>
                         <Eye size={14} />
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={() => handleCreateQuestions(test.id)}>
+                        <FileEdit size={14} />
                       </Button>
                       <Button 
                         variant="outline" 
