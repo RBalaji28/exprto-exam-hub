@@ -164,6 +164,12 @@ const MentorDashboard = () => {
                   <List size={16} />
                   View All Sessions
                 </Button>
+                <Link to="/mentor-subscribers">
+                  <Button variant="outline" className="w-full flex items-center gap-2">
+                    <Users size={16} />
+                    My Subscribers
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>

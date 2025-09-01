@@ -16,6 +16,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import StudentDashboard from "./pages/StudentDashboard";
 import MentorDashboard from "./pages/MentorDashboard";
+import MentorSubscribers from "./pages/MentorSubscribers";
+import ChatPlatform from "./pages/ChatPlatform";
 import AdminDashboard from "./pages/AdminDashboard";
 import BookingSessions from "./pages/BookingSessions";
 import Payment from "./pages/Payment";
@@ -46,7 +48,9 @@ const App = () => (
             <Route path="/become-mentor" element={<BecomeMentor />} />
             <Route path="/test-portal" element={<TestPortal />} />
             <Route path="/test-exam/:testId" element={<TestExam />} />
-            <Route path="/test-result/:testId" element={<TestResult />} />
+        <Route path="/test-result/:testId" element={<TestResult />} />
+        <Route path="/mentor-subscribers" element={<MentorSubscribers />} />
+        <Route path="/chat/:userId" element={<ChatPlatform />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

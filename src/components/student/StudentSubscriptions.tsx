@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Calendar, Star, Clock } from "lucide-react";
+import { Calendar, Star, Clock, MessageCircle } from "lucide-react";
 
 // Mock data - replace with real data from backend
 const mockSubscriptions = [
@@ -115,6 +116,15 @@ const StudentSubscriptions = () => {
                   <Button variant="outline" size="sm" className="flex-1">
                     Manage Plan
                   </Button>
+                  <Link to={`/chat/${subscription.mentorId}`}>
+                    <Button 
+                      className="w-full bg-gray-900 hover:bg-gray-800 flex items-center gap-2 mt-2" 
+                      size="sm"
+                    >
+                      <MessageCircle size={14} />
+                      Chat
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
