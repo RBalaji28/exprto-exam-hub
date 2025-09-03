@@ -146,14 +146,10 @@ const MentorDashboard = () => {
           <MentorSubscribers />
         </div>
 
-        {/* Subscription Plans Management */}
-        <div className="mb-8" id="subscription-manager">
-          <MentorSubscriptionManager />
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Quick Actions */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle>Quick Actions</CardTitle>
@@ -176,12 +172,20 @@ const MentorDashboard = () => {
                     My Subscribers
                   </Button>
                 </Link>
-                <Button variant="outline" className="w-full flex items-center gap-2" onClick={() => {
-                  document.getElementById('subscription-manager')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  <Settings size={16} />
+              </CardContent>
+            </Card>
+
+            {/* Manage Subscription Plans */}
+            <Card id="subscription-manager">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Settings size={20} />
                   Manage Subscription Plans
-                </Button>
+                </CardTitle>
+                <p className="text-sm text-gray-600">Customize your subscription offerings</p>
+              </CardHeader>
+              <CardContent>
+                <MentorSubscriptionManager />
               </CardContent>
             </Card>
           </div>
