@@ -5,9 +5,9 @@ import MentorSubscriptionManager from "@/components/mentor/MentorSubscriptionMan
 
 const ManageSubscriptionPlans = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-background shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16">
             <Link to="/mentor-dashboard">
@@ -16,7 +16,7 @@ const ManageSubscriptionPlans = () => {
                 Back to Dashboard
               </Button>
             </Link>
-            <h1 className="text-xl font-semibold text-gray-900 ml-4">Manage Subscription Plans</h1>
+            <h1 className="text-xl font-semibold text-foreground ml-4">Manage Subscription Plans</h1>
           </div>
         </div>
       </header>

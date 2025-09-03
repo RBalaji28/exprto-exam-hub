@@ -52,9 +52,9 @@ const MentorDashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-background shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-4">
@@ -76,7 +76,7 @@ const MentorDashboard = () => {
                   />
                 </label>
               </div>
-              <h1 className="text-xl font-semibold text-gray-900">Mentor Dashboard</h1>
+              <h1 className="text-xl font-semibold text-foreground">Mentor Dashboard</h1>
             </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
@@ -86,7 +86,7 @@ const MentorDashboard = () => {
                     {mentorName.split(' ').slice(-2).map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-sm text-gray-700">{mentorName}</span>
+                <span className="text-sm text-muted-foreground">{mentorName}</span>
               </div>
               <Link to="/">
                 <Button variant="outline" size="sm" className="flex items-center gap-2">
@@ -103,15 +103,15 @@ const MentorDashboard = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back, Dr. Mehta!</h2>
-          <p className="text-gray-600">Manage your sessions and connect with students.</p>
+          <h2 className="text-3xl font-bold text-foreground mb-2">Welcome Back, Dr. Mehta!</h2>
+          <p className="text-muted-foreground">Manage your sessions and connect with students.</p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Total Sessions</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">Total Sessions</CardTitle>
               <Calendar className="h-4 w-4 text-blue-600" />
             </CardHeader>
             <CardContent>
@@ -120,7 +120,7 @@ const MentorDashboard = () => {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Active Students</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">Active Students</CardTitle>
               <Users className="h-4 w-4 text-green-600" />
             </CardHeader>
             <CardContent>
@@ -129,7 +129,7 @@ const MentorDashboard = () => {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Rating</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">Rating</CardTitle>
               <Star className="h-4 w-4 text-yellow-600" />
             </CardHeader>
             <CardContent>
@@ -153,11 +153,11 @@ const MentorDashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Quick Actions</CardTitle>
-                <p className="text-sm text-gray-600">Manage your mentoring activities</p>
+                <p className="text-sm text-muted-foreground">Manage your mentoring activities</p>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Link to="/post-session">
-                  <Button className="w-full bg-gray-900 hover:bg-gray-800 flex items-center gap-2">
+                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-2">
                     <Plus size={16} />
                     Post New Session
                   </Button>

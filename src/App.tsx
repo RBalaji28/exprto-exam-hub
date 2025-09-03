@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserProvider } from "@/contexts/UserContext";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
 import ExamDetails from "./pages/ExamDetails";
 import BecomeMentor from "./pages/BecomeMentor";
@@ -38,10 +39,16 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <UserProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <UserProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
@@ -80,7 +87,8 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
     </UserProvider>
-  </QueryClientProvider>
+  </ThemeProvider>
+</QueryClientProvider>
 );
 
 export default App;
