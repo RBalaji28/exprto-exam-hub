@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { LogOut, Calendar, Users, Star, Plus, List, Camera, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import MentorSubscribers from "@/components/mentor/MentorSubscribers";
-import MentorSubscriptionManager from "@/components/mentor/MentorSubscriptionManager";
+
 
 const MentorDashboard = () => {
   const [mentorImage, setMentorImage] = useState<string | null>(null);
@@ -149,7 +149,7 @@ const MentorDashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Quick Actions */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1">
             <Card>
               <CardHeader>
                 <CardTitle>Quick Actions</CardTitle>
@@ -172,20 +172,12 @@ const MentorDashboard = () => {
                     My Subscribers
                   </Button>
                 </Link>
-              </CardContent>
-            </Card>
-
-            {/* Manage Subscription Plans */}
-            <Card id="subscription-manager">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Settings size={20} />
-                  Manage Subscription Plans
-                </CardTitle>
-                <p className="text-sm text-gray-600">Customize your subscription offerings</p>
-              </CardHeader>
-              <CardContent>
-                <MentorSubscriptionManager />
+                <Link to="/manage-subscription-plans">
+                  <Button variant="outline" className="w-full flex items-center gap-2">
+                    <Settings size={16} />
+                    Manage Subscription Plans
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>

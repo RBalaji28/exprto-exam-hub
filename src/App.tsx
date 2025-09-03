@@ -32,6 +32,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 import Mentors from "./pages/Mentors";
 import SubscribePlans from "./pages/SubscribePlans";
+import ManageSubscriptionPlans from "./pages/ManageSubscriptionPlans";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +73,7 @@ const App = () => (
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/mentors" element={<Mentors />} />
             <Route path="/mentors/:mentorId/subscribe" element={<SubscribePlans />} />
+            <Route path="/manage-subscription-plans" element={<ManageSubscriptionPlans />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
