@@ -13,6 +13,7 @@ interface Payment {
   domain: string;
   sessionId?: string;
   mentorName?: string;
+  mentorEmail?: string;
   subscriptionPlan?: string;
   amount: number;
   status: string;
@@ -47,8 +48,9 @@ const PaymentManagement = ({ payments }: PaymentManagementProps) => {
                 <TableHead>Session ID</TableHead>
               ) : (
                 <>
-                  <TableHead>Mentor Name</TableHead>
-                  <TableHead>Plan</TableHead>
+              <TableHead>Mentor Name</TableHead>
+              <TableHead>Mentor Email</TableHead>
+              <TableHead>Plan</TableHead>
                 </>
               )}
               <TableHead>Amount Paid</TableHead>
@@ -73,6 +75,7 @@ const PaymentManagement = ({ payments }: PaymentManagementProps) => {
                 ) : (
                   <>
                     <TableCell>{payment.mentorName}</TableCell>
+                    <TableCell>{payment.mentorEmail}</TableCell>
                     <TableCell>
                       <Badge variant="secondary" className="text-xs">
                         {payment.subscriptionPlan}

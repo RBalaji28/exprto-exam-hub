@@ -4,9 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { LogOut, Calendar, Users, Star, Plus, List, Camera } from "lucide-react";
+import { LogOut, Calendar, Users, Star, Plus, List, Camera, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import MentorSubscribers from "@/components/mentor/MentorSubscribers";
+import MentorSubscriptionManager from "@/components/mentor/MentorSubscriptionManager";
 
 const MentorDashboard = () => {
   const [mentorImage, setMentorImage] = useState<string | null>(null);
@@ -145,6 +146,11 @@ const MentorDashboard = () => {
           <MentorSubscribers />
         </div>
 
+        {/* Subscription Plans Management */}
+        <div className="mb-8" id="subscription-manager">
+          <MentorSubscriptionManager />
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Quick Actions */}
           <div className="lg:col-span-1">
@@ -170,6 +176,12 @@ const MentorDashboard = () => {
                     My Subscribers
                   </Button>
                 </Link>
+                <Button variant="outline" className="w-full flex items-center gap-2" onClick={() => {
+                  document.getElementById('subscription-manager')?.scrollIntoView({ behavior: 'smooth' });
+                }}>
+                  <Settings size={16} />
+                  Manage Subscription Plans
+                </Button>
               </CardContent>
             </Card>
           </div>

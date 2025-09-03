@@ -551,64 +551,69 @@ export const payments = [
     type: "session" as const
   },
   // Subscription Payments
-  {
-    id: "P006",
-    studentName: "Kavya Reddy",
-    email: "kavya.reddy@email.com",
-    domain: "GATE",
-    mentorName: "Dr. Sarah Johnson",
-    subscriptionPlan: "1 Month",
-    amount: 500,
-    status: "Completed",
-    paymentDate: "2024-01-20",
-    type: "subscription" as const
-  },
-  {
-    id: "P007",
-    studentName: "Amit Verma",
-    email: "amit.verma@email.com",
-    domain: "JEE",
-    mentorName: "Prof. Raj Kumar",
-    subscriptionPlan: "6 Months",
-    amount: 2500,
-    status: "Completed",
-    paymentDate: "2024-01-21",
-    type: "subscription" as const
-  },
-  {
-    id: "P008",
-    studentName: "Neha Joshi",
-    email: "neha.joshi@email.com",
-    domain: "NEET",
-    mentorName: "Dr. Priya Sharma",
-    subscriptionPlan: "1 Year",
-    amount: 4500,
-    status: "Pending",
-    paymentDate: "2024-01-22",
-    type: "subscription" as const
-  },
-  {
-    id: "P009",
-    studentName: "Rohan Gupta",
-    email: "rohan.gupta@email.com",
-    domain: "JEE",
-    mentorName: "Arjun Mehta",
-    subscriptionPlan: "1 Month",
-    amount: 500,
-    status: "Completed",
-    paymentDate: "2024-01-23",
-    type: "subscription" as const
-  },
-  {
-    id: "P010",
-    studentName: "Srishti Agarwal",
-    email: "srishti.agarwal@email.com",
-    domain: "GATE",
-    mentorName: "Sneha Gupta",
-    subscriptionPlan: "6 Months",
-    amount: 2500,
-    status: "Failed",
-    paymentDate: "2024-01-24",
-    type: "subscription" as const
-  }
+    {
+      id: "P006",
+      studentName: "Kavya Reddy",
+      email: "kavya.reddy@email.com",
+      domain: "GATE",
+      mentorName: "Dr. Sarah Johnson",
+      mentorEmail: "dr.sarah.johnson@email.com",
+      subscriptionPlan: "1 Month",
+      amount: 500,
+      status: "Completed",
+      paymentDate: "2024-01-20",
+      type: "subscription" as const
+    },
+    {
+      id: "P007",
+      studentName: "Amit Verma",
+      email: "amit.verma@email.com",
+      domain: "JEE",
+      mentorName: "Prof. Raj Kumar",
+      mentorEmail: "prof.raj.kumar@email.com",
+      subscriptionPlan: "6 Months",
+      amount: 2500,
+      status: "Completed",
+      paymentDate: "2024-01-21",
+      type: "subscription" as const
+    },
+    {
+      id: "P008",
+      studentName: "Neha Joshi",
+      email: "neha.joshi@email.com",
+      domain: "NEET",
+      mentorName: "Dr. Priya Sharma",
+      mentorEmail: "dr.priya.sharma@email.com",
+      subscriptionPlan: "1 Year",
+      amount: 4500,
+      status: "Pending",
+      paymentDate: "2024-01-22",
+      type: "subscription" as const
+    },
+    {
+      id: "P009",
+      studentName: "Rohan Gupta",
+      email: "rohan.gupta@email.com",
+      domain: "JEE",
+      mentorName: "Arjun Mehta",
+      mentorEmail: "arjun.mehta@email.com",
+      subscriptionPlan: "1 Month",
+      amount: 500,
+      status: "Completed",
+      paymentDate: "2024-01-23",
+      type: "subscription" as const
+    },
+    {
+      id: "P010",
+      studentName: "Srishti Agarwal",
+      email: "srishti.agarwal@email.com",
+      domain: "GATE",
+      mentorName: "Sneha Gupta",
+      mentorEmail: "sneha.gupta@email.com",
+      subscriptionPlan: "6 Months",
+      amount: 2500,
+      status: "Failed",
+      paymentDate: "2024-01-24",
+      type: "subscription" as const
+    }
 ];
