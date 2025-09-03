@@ -9,6 +9,8 @@ import {
   FileText, 
   Share2,
   BookOpen,
+  TestTube,
+  MessageSquare,
   X 
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -31,7 +33,8 @@ const AdminSidebar = ({ isOpen, onClose }: AdminSidebarProps) => {
     { icon: CreditCard, label: "Payment Details", href: "/admin-dashboard?tab=payments" },
     { icon: FileText, label: "Content Management", href: "/admin-dashboard?tab=content" },
     { icon: BookOpen, label: "Blog Management", href: "/admin-dashboard?tab=blogs" },
-    { icon: FileText, label: "Test Management", href: "/admin-dashboard?tab=tests" },
+    { icon: TestTube, label: "Test Management", href: "/admin-dashboard?tab=tests" },
+    { icon: MessageSquare, label: "Feedback Management", href: "/admin-dashboard?tab=feedback" },
   ];
 
   const isActive = (path: string) => {

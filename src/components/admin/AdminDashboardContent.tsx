@@ -8,6 +8,7 @@ import SocialMediaSettings from "@/components/admin/SocialMediaSettings";
 import ContentManagement from "@/components/admin/ContentManagement";
 import BlogManagement from "@/components/admin/BlogManagement";
 import TestManagement from "@/components/admin/TestManagement";
+import FeedbackManagement from "@/components/admin/FeedbackManagement";
 import { dashboardStats, students, sessionData, payments } from "@/data/adminMockData";
 
 interface AdminDashboardContentProps {
@@ -117,6 +118,16 @@ const AdminDashboardContent = ({
             <p className="text-gray-600">Create and manage test questions and portal content.</p>
           </div>
           <TestManagement />
+        </>
+      )}
+
+      {activeTab === 'feedback' && (
+        <>
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Feedback Management</h2>
+            <p className="text-gray-600">Manage testimonials and feedback from students and mentors.</p>
+          </div>
+          <FeedbackManagement />
         </>
       )}
     </main>

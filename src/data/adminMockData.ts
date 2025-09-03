@@ -494,6 +494,7 @@ export const studentSessionData = {
 };
 
 export const payments = [
+  // Session Payments
   {
     id: "P001",
     studentName: "Arjun Patel",
@@ -502,7 +503,8 @@ export const payments = [
     sessionId: "L001",
     amount: 500,
     status: "Completed",
-    paymentDate: "2024-01-15"
+    paymentDate: "2024-01-15",
+    type: "session" as const
   },
   {
     id: "P002",
@@ -512,7 +514,8 @@ export const payments = [
     sessionId: "L002",
     amount: 750,
     status: "Completed",
-    paymentDate: "2024-01-16"
+    paymentDate: "2024-01-16",
+    type: "session" as const
   },
   {
     id: "P003",
@@ -522,7 +525,8 @@ export const payments = [
     sessionId: "L003",
     amount: 600,
     status: "Pending",
-    paymentDate: "2024-01-17"
+    paymentDate: "2024-01-17",
+    type: "session" as const
   },
   {
     id: "P004",
@@ -532,7 +536,8 @@ export const payments = [
     sessionId: "L004",
     amount: 800,
     status: "Completed",
-    paymentDate: "2024-01-18"
+    paymentDate: "2024-01-18",
+    type: "session" as const
   },
   {
     id: "P005",
@@ -542,36 +547,68 @@ export const payments = [
     sessionId: "L005",
     amount: 650,
     status: "Failed",
-    paymentDate: "2024-01-19"
+    paymentDate: "2024-01-19",
+    type: "session" as const
   },
+  // Subscription Payments
   {
     id: "P006",
     studentName: "Kavya Reddy",
     email: "kavya.reddy@email.com",
     domain: "GATE",
-    sessionId: "L001",
-    amount: 550,
+    mentorName: "Dr. Sarah Johnson",
+    subscriptionPlan: "1 Month",
+    amount: 500,
     status: "Completed",
-    paymentDate: "2024-01-20"
+    paymentDate: "2024-01-20",
+    type: "subscription" as const
   },
   {
     id: "P007",
     studentName: "Amit Verma",
     email: "amit.verma@email.com",
     domain: "JEE",
-    sessionId: "L002",
-    amount: 700,
+    mentorName: "Prof. Raj Kumar",
+    subscriptionPlan: "6 Months",
+    amount: 2500,
     status: "Completed",
-    paymentDate: "2024-01-21"
+    paymentDate: "2024-01-21",
+    type: "subscription" as const
   },
   {
     id: "P008",
     studentName: "Neha Joshi",
     email: "neha.joshi@email.com",
     domain: "NEET",
-    sessionId: "L003",
-    amount: 620,
+    mentorName: "Dr. Priya Sharma",
+    subscriptionPlan: "1 Year",
+    amount: 4500,
     status: "Pending",
-    paymentDate: "2024-01-22"
+    paymentDate: "2024-01-22",
+    type: "subscription" as const
+  },
+  {
+    id: "P009",
+    studentName: "Rohan Gupta",
+    email: "rohan.gupta@email.com",
+    domain: "JEE",
+    mentorName: "Arjun Mehta",
+    subscriptionPlan: "1 Month",
+    amount: 500,
+    status: "Completed",
+    paymentDate: "2024-01-23",
+    type: "subscription" as const
+  },
+  {
+    id: "P010",
+    studentName: "Srishti Agarwal",
+    email: "srishti.agarwal@email.com",
+    domain: "GATE",
+    mentorName: "Sneha Gupta",
+    subscriptionPlan: "6 Months",
+    amount: 2500,
+    status: "Failed",
+    paymentDate: "2024-01-24",
+    type: "subscription" as const
   }
 ];
