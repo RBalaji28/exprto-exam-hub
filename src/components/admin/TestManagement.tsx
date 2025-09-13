@@ -11,13 +11,14 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Plus, Edit, Trash2, Eye, BookOpen, Clock, Users, FileEdit } from "lucide-react";
 import TestDetailsView from "./TestDetailsView";
 import TestQuestionCreator from "./TestQuestionCreator";
+import { categoryData, getSubtopicsByMainTopic, getSubtopicById } from "@/data/categoryData";
 
 // Mock data - replace with real data from backend
 const mockTests = [
   {
     id: "test1",
     title: "JEE Main Mathematics - Algebra",
-    category: "JEE",
+    category: "jee",
     subject: "Mathematics",
     totalQuestions: 30,
     duration: 90,
@@ -29,7 +30,7 @@ const mockTests = [
   {
     id: "test2",
     title: "NEET Biology - Human Physiology", 
-    category: "NEET",
+    category: "neet",
     subject: "Biology",
     totalQuestions: 45,
     duration: 60,
@@ -40,8 +41,6 @@ const mockTests = [
   }
 ];
 
-const categories = ["JEE", "NEET", "UPSC", "GATE"];
-const subjects = ["Mathematics", "Physics", "Chemistry", "Biology", "English", "Geography", "History", "Computer Science"];
 const difficulties = ["Easy", "Medium", "Hard"];
 
 const TestManagement = () => {
@@ -50,6 +49,8 @@ const TestManagement = () => {
   const [editingTest, setEditingTest] = useState<any>(null);
   const [currentView, setCurrentView] = useState<'list' | 'details' | 'questions'>('list');
   const [selectedTestId, setSelectedTestId] = useState<string | null>(null);
+  const [selectedMainTopic, setSelectedMainTopic] = useState<string>("competitive-exams");
+  const [selectedSubtopic, setSelectedSubtopic] = useState<string>("jee");
   
   // Form state
   const [formData, setFormData] = useState({
@@ -61,6 +62,8 @@ const TestManagement = () => {
     difficulty: "",
     status: "Draft"
   });
+
+  const availableSubtopics = getSubtopicsByMainTopic(selectedMainTopic);
 
   const resetForm = () => {
     setFormData({
@@ -194,30 +197,50 @@ const TestManagement = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="category">Category</Label>
-                <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
+                <Label htmlFor="main-topic">Main Topic</Label>
+                <Select value={selectedMainTopic} onValueChange={(value) => {
+                  setSelectedMainTopic(value);
+                  setSelectedSubtopic("");
+                  setFormData({...formData, category: ""});
+                }}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select main topic" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categoryData.map((topic) => (
+                      <SelectItem key={topic.id} value={topic.id}>
+                        {topic.icon} {topic.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="category">Category (Subtopic)</Label>
+                <Select value={formData.category} onValueChange={(value) => {
+                  setSelectedSubtopic(value);
+                  setFormData({...formData, category: value});
+                }}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    {categories.map((category) => (
-                      <SelectItem key={category} value={category}>{category}</SelectItem>
+                    {availableSubtopics.map((subtopic) => (
+                      <SelectItem key={subtopic.id} value={subtopic.id}>
+                        {subtopic.name}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="subject">Subject</Label>
-                <Select value={formData.subject} onValueChange={(value) => setFormData({...formData, subject: value})}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select subject" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {subjects.map((subject) => (
-                      <SelectItem key={subject} value={subject}>{subject}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <Input
+                  id="subject"
+                  value={formData.subject}
+                  onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                  placeholder="Enter subject name"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="duration">Duration (minutes)</Label>
@@ -306,7 +329,9 @@ const TestManagement = () => {
                 <TableRow key={test.id}>
                   <TableCell className="font-medium">{test.title}</TableCell>
                   <TableCell>
-                    <Badge variant="outline" className="text-xs">{test.category}</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      {getSubtopicById(test.category)?.name || test.category}
+                    </Badge>
                   </TableCell>
                   <TableCell>{test.subject}</TableCell>
                   <TableCell className="flex items-center gap-1">

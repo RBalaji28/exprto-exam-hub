@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMentors } from "@/contexts/MentorContext";
-
-
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Star, Users } from "lucide-react";
+import { CategoryFilter } from "@/components/ui/category-filter";
+import { getSubtopicById } from "@/data/categoryData";
 
 const renderStars = (rating: number) =>
   Array.from({ length: 5 }, (_, i) => (
@@ -16,20 +15,24 @@ const renderStars = (rating: number) =>
   ));
 
 const Mentors = () => {
-  const { mentors, domains } = useMentors();
-  
-  
+  const { mentors } = useMentors();
   const navigate = useNavigate();
-  const [category, setCategory] = useState<string>("all");
+  const [selectedMainTopic, setSelectedMainTopic] = useState<string>("all");
+  const [selectedSubtopic, setSelectedSubtopic] = useState<string>("all");
 
   useEffect(() => {
     document.title = "Mentors | MentxTv";
   }, []);
 
   const filtered = useMemo(() => {
-    if (category === "all") return mentors;
-    return mentors.filter((m) => m.domain === category);
-  }, [mentors, category]);
+    if (selectedSubtopic === "all") return mentors;
+    return mentors.filter((m) => m.domain === selectedSubtopic);
+  }, [mentors, selectedSubtopic]);
+
+  const handleCategoryChange = (mainTopic: string, subtopic: string) => {
+    setSelectedMainTopic(mainTopic);
+    setSelectedSubtopic(subtopic);
+  };
 
   const handleSubscribe = (mentorId: string) => {
     navigate(`/mentors/${mentorId}/subscribe`);
@@ -46,18 +49,11 @@ const Mentors = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <section className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Category</label>
-          <Select defaultValue="all" onValueChange={setCategory}>
-            <SelectTrigger className="w-56">
-              <SelectValue placeholder="All" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              {domains.map((d) => (
-                <SelectItem key={d} value={d}>{d}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <CategoryFilter
+            onCategoryChange={handleCategoryChange}
+            defaultMainTopic="all"
+            defaultSubtopic="all"
+          />
         </section>
 
         <section>
@@ -75,10 +71,12 @@ const Mentors = () => {
                         )}
                       </AspectRatio>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-semibold text-gray-900">{m.name}</h3>
-                      <Badge variant="outline" className="text-xs">{m.domain}</Badge>
-                    </div>
+                     <div className="flex items-center justify-between">
+                       <h3 className="text-lg font-semibold text-gray-900">{m.name}</h3>
+                       <Badge variant="outline" className="text-xs">
+                         {getSubtopicById(m.domain)?.name || m.domain}
+                       </Badge>
+                     </div>
                     <div className="mt-2 flex items-center gap-2">
                       <div className="flex">{renderStars(m.rating)}</div>
                       <span className="text-sm text-gray-600">({m.rating.toFixed(1)})</span>

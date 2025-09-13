@@ -12,15 +12,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useMentors, MentorItem } from "@/contexts/MentorContext";
+import { categoryData, getSubtopicsByMainTopic, getSubtopicById } from "@/data/categoryData";
 
 const MentorManagement = () => {
   const { mentors, addMentor, removeMentor } = useMentors();
   const [domain, setDomain] = useState<string>("all");
+  const [selectedMainTopic, setSelectedMainTopic] = useState<string>("competitive-exams");
+  const [selectedSubtopic, setSelectedSubtopic] = useState<string>("jee");
 
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState<Omit<MentorItem, "id">>({
     name: "",
-    domain: "JEE",
+    domain: "jee",
     rating: 4.5,
     sessions: 0,
     image: "",
@@ -32,6 +35,8 @@ const MentorManagement = () => {
     if (domain === "all") return mentors;
     return mentors.filter((m) => m.domain === domain);
   }, [mentors, domain]);
+
+  const availableSubtopics = getSubtopicsByMainTopic(selectedMainTopic);
 
   const renderStars = (rating: number) =>
     Array.from({ length: 5 }, (_, i) => (
@@ -69,7 +74,7 @@ const MentorManagement = () => {
       badFeedback: form.badFeedback,
     });
     setOpen(false);
-    setForm({ name: "", domain: "JEE", rating: 4.5, sessions: 0, image: "", goodFeedback: [], badFeedback: [] });
+    setForm({ name: "", domain: "jee", rating: 4.5, sessions: 0, image: "", goodFeedback: [], badFeedback: [] });
     toast.success("Mentor added successfully!");
   };
 
@@ -84,10 +89,13 @@ const MentorManagement = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Domains</SelectItem>
-              <SelectItem value="JEE">JEE</SelectItem>
-              <SelectItem value="NEET">NEET</SelectItem>
-              <SelectItem value="UPSC">UPSC</SelectItem>
-              <SelectItem value="GATE">GATE</SelectItem>
+              {categoryData.flatMap(topic => 
+                topic.subtopics.map(subtopic => (
+                  <SelectItem key={subtopic.id} value={subtopic.id}>
+                    {subtopic.name}
+                  </SelectItem>
+                ))
+              )}
             </SelectContent>
           </Select>
         </div>
@@ -114,16 +122,40 @@ const MentorManagement = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="mentor-domain">Teaching Domain *</Label>
-                <Select value={form.domain} onValueChange={(v) => setForm({ ...form, domain: v })}>
+                <Label htmlFor="mentor-main-topic">Main Topic *</Label>
+                <Select value={selectedMainTopic} onValueChange={(v) => {
+                  setSelectedMainTopic(v);
+                  setSelectedSubtopic("");
+                  setForm({ ...form, domain: "" });
+                }}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select domain" />
+                    <SelectValue placeholder="Select main topic" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="JEE">JEE</SelectItem>
-                    <SelectItem value="NEET">NEET</SelectItem>
-                    <SelectItem value="UPSC">UPSC</SelectItem>
-                    <SelectItem value="GATE">GATE</SelectItem>
+                    {categoryData.map(topic => (
+                      <SelectItem key={topic.id} value={topic.id}>
+                        {topic.icon} {topic.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="mentor-domain">Teaching Domain (Subtopic) *</Label>
+                <Select value={form.domain} onValueChange={(v) => {
+                  setSelectedSubtopic(v);
+                  setForm({ ...form, domain: v });
+                }}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select subtopic" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {availableSubtopics.map(subtopic => (
+                      <SelectItem key={subtopic.id} value={subtopic.id}>
+                        {subtopic.name}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
@@ -241,7 +273,9 @@ const MentorManagement = () => {
                   </TableCell>
                   <TableCell>{mentor.id}</TableCell>
                   <TableCell>
-                    <Badge variant="outline" className="text-xs">{mentor.domain}</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      {getSubtopicById(mentor.domain)?.name || mentor.domain}
+                    </Badge>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">

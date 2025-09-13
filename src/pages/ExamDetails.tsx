@@ -4,25 +4,28 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import { CategoryFilter } from "@/components/ui/category-filter";
 
 const ExamDetails = () => {
-  const [selectedExam, setSelectedExam] = useState("IIT (JEE)");
+  const [selectedExam, setSelectedExam] = useState("jee");
+  const [selectedMainTopic, setSelectedMainTopic] = useState<string>("competitive-exams");
+  const [selectedSubtopic, setSelectedSubtopic] = useState<string>("jee");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const exams = [
-    "IIT (JEE)",
-    "NEET", 
-    "UPSC",
-    "BITSAT",
-    "GATE",
-    "CLAT",
-    "CA",
-    "NIFT",
-    "CAT"
+    { id: "jee", name: "IIT (JEE)" },
+    { id: "neet", name: "NEET" },
+    { id: "upsc", name: "UPSC" },
+    { id: "bitsat", name: "BITSAT" },
+    { id: "gate", name: "GATE" },
+    { id: "clat", name: "CLAT" },
+    { id: "ca", name: "CA" },
+    { id: "nift", name: "NIFT" },
+    { id: "cat", name: "CAT" }
   ];
 
   const examDetails = {
-    "IIT (JEE)": {
+    "jee": {
       title: "IIT JEE Exam Details",
       highlights: "JEE 2026 Highlights",
       description: "The Joint Entrance Examination (JEE) is India's largest engineering entrance examination for undergraduate B.Tech and B.Arch courses in top institutes like IITs, NITs, IIITs, and CFTIs. JEE is conducted in two phases: JEE Main (by NTA) and JEE Advanced (by a designated IIT on rotation each year).",
@@ -77,7 +80,7 @@ const ExamDetails = () => {
         ]
       }
     },
-    "NEET": {
+    "neet": {
       title: "NEET Exam Details",
       highlights: "NEET 2026 Highlights",
       description: "The National Eligibility cum Entrance Test (NEET) is the single entrance examination for admission to MBBS, BDS, AYUSH and other medical courses in India. It is conducted by the National Testing Agency (NTA).",
@@ -103,7 +106,7 @@ const ExamDetails = () => {
         { criteria: "Minimum Marks", details: "50% in PCB for General/OBC, 40% for SC/ST/OPH" }
       ]
     },
-    "UPSC": {
+    "upsc": {
       title: "UPSC Civil Services Exam Details",
       highlights: "UPSC CSE 2026 Highlights",
       description: "The Union Public Service Commission conducts the Civil Services Examination to recruit candidates for various Group A and Group B central services like IAS, IFS, IPS, and other allied services.",
@@ -129,7 +132,7 @@ const ExamDetails = () => {
         { criteria: "Attempt Limit", details: "6 attempts for General, 9 for OBC, unlimited for SC/ST" }
       ]
     },
-    "BITSAT": {
+    "bitsat": {
       title: "BITSAT Exam Details",
       highlights: "BITSAT 2026 Highlights",
       description: "Birla Institute of Technology and Science Admission Test (BITSAT) is conducted by BITS Pilani for admission to its campuses in Pilani, Goa, and Hyderabad for various undergraduate engineering programs.",
@@ -154,7 +157,7 @@ const ExamDetails = () => {
         { criteria: "JEE Main", details: "Should appear for JEE Main 2026" }
       ]
     },
-    "GATE": {
+    "gate": {
       title: "GATE Exam Details",
       highlights: "GATE 2026 Highlights",
       description: "Graduate Aptitude Test in Engineering (GATE) is conducted for admission to postgraduate programs in engineering, technology, and architecture, and for recruitment in PSUs.",
@@ -179,7 +182,7 @@ const ExamDetails = () => {
         { criteria: "Subjects", details: "Choose from 27 available papers" }
       ]
     },
-    "CLAT": {
+    "clat": {
       title: "CLAT Exam Details",
       highlights: "CLAT 2026 Highlights",
       description: "Common Law Admission Test (CLAT) is conducted for admission to undergraduate and postgraduate law programs in National Law Universities across India.",
@@ -204,7 +207,7 @@ const ExamDetails = () => {
         { criteria: "Age Limit", details: "No upper age limit" }
       ]
     },
-    "CA": {
+    "ca": {
       title: "CA Exam Details",
       highlights: "CA 2026 Highlights",
       description: "Chartered Accountancy is conducted by the Institute of Chartered Accountants of India (ICAI). It consists of three levels: Foundation, Intermediate, and Final.",
@@ -229,7 +232,7 @@ const ExamDetails = () => {
         { criteria: "Final", details: "Intermediate pass + 3 years articleship" }
       ]
     },
-    "NIFT": {
+    "nift": {
       title: "NIFT Exam Details",
       highlights: "NIFT 2026 Highlights",
       description: "National Institute of Fashion Technology conducts entrance examination for admission to undergraduate and postgraduate programs in fashion and design.",
@@ -254,7 +257,7 @@ const ExamDetails = () => {
         { criteria: "Age Limit", details: "23 years for UG, 30 years for PG" }
       ]
     },
-    "CAT": {
+    "cat": {
       title: "CAT Exam Details",
       highlights: "CAT 2026 Highlights",
       description: "Common Admission Test (CAT) is conducted for admission to MBA programs in IIMs and other top B-schools in India.",
@@ -289,6 +292,19 @@ const ExamDetails = () => {
       
       <div className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
+          {/* Category Filter */}
+          <div className="mb-8">
+            <CategoryFilter
+              onCategoryChange={(mainTopic, subtopic) => {
+                setSelectedMainTopic(mainTopic);
+                setSelectedSubtopic(subtopic);
+                setSelectedExam(subtopic);
+              }}
+              defaultMainTopic="competitive-exams"
+              defaultSubtopic="jee"
+            />
+          </div>
+
           {/* Dropdown Navigation */}
           <div className="mb-8">
             <div className="relative inline-block">
@@ -297,7 +313,7 @@ const ExamDetails = () => {
                 variant="outline"
                 className="w-64 justify-between border-blue-500 text-blue-600 hover:bg-blue-50 py-3 px-4"
               >
-                {selectedExam}
+                {exams.find(e => e.id === selectedExam)?.name || selectedExam}
                 <ChevronDown className={`h-4 w-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </Button>
               
@@ -305,14 +321,14 @@ const ExamDetails = () => {
                 <div className="absolute top-full left-0 w-64 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                   {exams.map((exam) => (
                     <button
-                      key={exam}
+                      key={exam.id}
                       onClick={() => {
-                        setSelectedExam(exam);
+                        setSelectedExam(exam.id);
                         setIsDropdownOpen(false);
                       }}
                       className="w-full text-left px-4 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-100 last:border-b-0"
                     >
-                      {exam}
+                      {exam.name}
                     </button>
                   ))}
                 </div>

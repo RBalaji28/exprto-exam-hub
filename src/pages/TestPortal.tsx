@@ -6,18 +6,28 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { BookOpen, Clock, FileText, Award, Target, CheckCircle } from "lucide-react";
+import { CategoryFilter } from "@/components/ui/category-filter";
 
 const TestPortal = () => {
-  const [selectedExam, setSelectedExam] = useState("JEE Main");
+  const [selectedExam, setSelectedExam] = useState("jee");
+  const [selectedMainTopic, setSelectedMainTopic] = useState<string>("competitive-exams");
+  const [selectedSubtopic, setSelectedSubtopic] = useState<string>("jee");
   const navigate = useNavigate();
 
   const exams = [
-    "JEE Main", "JEE Advanced", "NEET", "BITSAT", "VITEEE", 
-    "COMEDK", "KCET", "MHT CET", "WBJEE"
+    { id: "jee", name: "JEE Main" },
+    { id: "jee-advanced", name: "JEE Advanced" },
+    { id: "neet", name: "NEET" },
+    { id: "bitsat", name: "BITSAT" },
+    { id: "viteee", name: "VITEEE" },
+    { id: "comedk", name: "COMEDK" },
+    { id: "kcet", name: "KCET" },
+    { id: "mht-cet", name: "MHT CET" },
+    { id: "wbjee", name: "WBJEE" }
   ];
 
   const testData = {
-    "JEE Main": {
+    "jee": {
       icon: <Target className="w-6 h-6" />,
       badge: "NEW",
       title: "JEE Main 2025",
@@ -32,7 +42,7 @@ const TestPortal = () => {
         { name: "JEE Adv PYQs", count: "200+ Questions", description: "Advanced previous questions" }
       ]
     },
-    "JEE Advanced": {
+    "jee-advanced": {
       icon: <Award className="w-6 h-6" />,
       badge: "PREMIUM",
       title: "JEE Advanced 2025",
@@ -47,7 +57,7 @@ const TestPortal = () => {
         { name: "Integer Type Questions", count: "100+ Questions", description: "Numerical answer type" }
       ]
     },
-    "NEET": {
+    "neet": {
       icon: <BookOpen className="w-6 h-6" />,
       badge: "POPULAR",
       title: "NEET 2025",
@@ -62,7 +72,7 @@ const TestPortal = () => {
         { name: "AIIMS PYQs", count: "150+ Questions", description: "AIIMS previous questions" }
       ]
     },
-    "BITSAT": {
+    "bitsat": {
       icon: <FileText className="w-6 h-6" />,
       badge: "NEW",
       title: "BITSAT 2025",
@@ -77,7 +87,7 @@ const TestPortal = () => {
         { name: "Speed Tests", count: "30 Tests", description: "Time management practice" }
       ]
     },
-    "VITEEE": {
+    "viteee": {
       icon: <CheckCircle className="w-6 h-6" />,
       badge: "UPDATED",
       title: "VITEEE 2025",
@@ -92,7 +102,7 @@ const TestPortal = () => {
         { name: "Aptitude Tests", count: "15 Tests", description: "Logical reasoning" }
       ]
     },
-    "COMEDK": {
+    "comedk": {
       icon: <Target className="w-6 h-6" />,
       badge: "NEW",
       title: "COMEDK 2025",
@@ -107,7 +117,7 @@ const TestPortal = () => {
         { name: "Chemistry Tests", count: "15 Tests", description: "Chemistry focus" }
       ]
     },
-    "KCET": {
+    "kcet": {
       icon: <BookOpen className="w-6 h-6" />,
       badge: "POPULAR",
       title: "KCET 2025",
@@ -122,7 +132,7 @@ const TestPortal = () => {
         { name: "Mathematics Tests", count: "18 Tests", description: "For engineering stream" }
       ]
     },
-    "MHT CET": {
+    "mht-cet": {
       icon: <Award className="w-6 h-6" />,
       badge: "UPDATED",
       title: "MHT CET 2025",
@@ -137,7 +147,7 @@ const TestPortal = () => {
         { name: "PCB Tests", count: "20 Tests", description: "Physics, Chemistry, Biology" }
       ]
     },
-    "WBJEE": {
+    "wbjee": {
       icon: <FileText className="w-6 h-6" />,
       badge: "NEW",
       title: "WBJEE 2025",
@@ -171,19 +181,32 @@ const TestPortal = () => {
             </p>
           </div>
 
+          {/* Category Filter */}
+          <div className="mb-8 flex justify-center">
+            <CategoryFilter
+              onCategoryChange={(mainTopic, subtopic) => {
+                setSelectedMainTopic(mainTopic);
+                setSelectedSubtopic(subtopic);
+                setSelectedExam(subtopic);
+              }}
+              defaultMainTopic="competitive-exams"
+              defaultSubtopic="jee"
+            />
+          </div>
+
           {/* Exam Selection */}
           <div className="flex flex-wrap justify-center gap-2 mb-12">
             {exams.map((exam) => (
               <Button
-                key={exam}
-                onClick={() => setSelectedExam(exam)}
+                key={exam.id}
+                onClick={() => setSelectedExam(exam.id)}
                 className={`px-6 py-2 rounded-full transition-all duration-300 ${
-                  selectedExam === exam
+                  selectedExam === exam.id
                     ? 'bg-blue-500 text-white shadow-lg hover:bg-blue-600'
                     : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
                 }`}
               >
-                {exam}
+                {exam.name}
               </Button>
             ))}
           </div>
