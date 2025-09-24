@@ -11,6 +11,7 @@ import {
   BookOpen,
   TestTube,
   MessageSquare,
+  Megaphone,
   X 
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -34,6 +35,7 @@ const AdminSidebar = ({ isOpen, onClose }: AdminSidebarProps) => {
     { icon: FileText, label: "Content Management", href: "/admin-dashboard?tab=content" },
     { icon: BookOpen, label: "Blog Management", href: "/admin-dashboard?tab=blogs" },
     { icon: TestTube, label: "Test Management", href: "/admin-dashboard?tab=tests" },
+    { icon: Megaphone, label: "Advertisement Management", href: "/admin-dashboard?tab=advertisements" },
     { icon: MessageSquare, label: "Feedback Management", href: "/admin-dashboard?tab=feedback" },
   ];
 

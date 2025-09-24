@@ -9,6 +9,7 @@ import ContentManagement from "@/components/admin/ContentManagement";
 import BlogManagement from "@/components/admin/BlogManagement";
 import TestManagement from "@/components/admin/TestManagement";
 import FeedbackManagement from "@/components/admin/FeedbackManagement";
+import AdvertisementManagement from "@/components/admin/AdvertisementManagement";
 import { dashboardStats, students, sessionData, payments } from "@/data/adminMockData";
 
 interface AdminDashboardContentProps {
@@ -118,6 +119,16 @@ const AdminDashboardContent = ({
             <p className="text-gray-600">Create and manage test questions and portal content.</p>
           </div>
           <TestManagement />
+        </>
+      )}
+
+      {activeTab === 'advertisements' && (
+        <>
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Advertisement Management</h2>
+            <p className="text-gray-600">Manage advertisement banners for the booking sessions page.</p>
+          </div>
+          <AdvertisementManagement />
         </>
       )}
 

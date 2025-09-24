@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SessionCard from "@/components/SessionCard";
+import AdvertisementBanner from "@/components/AdvertisementBanner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { CategoryFilter } from "@/components/ui/category-filter";
@@ -308,14 +309,16 @@ const BookingSessions = () => {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Book Your Sessions</h1>
           <p className="text-gray-600">Choose from our available mentorship sessions and book your slot.</p>
-          
-          <div className="mt-6">
-            <CategoryFilter
-              onCategoryChange={handleCategoryChange}
-              defaultMainTopic="all"
-              defaultSubtopic="all"
-            />
-          </div>
+        </div>
+
+        <AdvertisementBanner />
+
+        <div className="mb-8">
+          <CategoryFilter
+            onCategoryChange={handleCategoryChange}
+            defaultMainTopic="all"
+            defaultSubtopic="all"
+          />
         </div>
 
         <Tabs defaultValue="group" className="w-full">
